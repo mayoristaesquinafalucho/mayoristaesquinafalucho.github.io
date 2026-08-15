@@ -1,0 +1,14 @@
+.heroBanner { background: #fff; overflow: hidden; }
+.heroBanner img { display: block; width: 100%; height: auto; }
+.categories a { padding: 22px 10px; color: #fff; text-align: center; border-right: 1px solid #ffffff2b; font-weight: 700; text-transform: uppercase; }
+.productSection { padding: 70px max(8vw, 28px); scroll-margin-top: 110px; }
+.productSection.alt { background: var(--cream); }
+.productSection h2 { margin: 10px 0; font: 600 clamp(34px, 4vw, 56px)/1.1 'Playfair Display', serif; }
+.catalog { padding-bottom: 15px; }
+.categoryEmpty { color: #667085; grid-column: 1 / -1; }
+@media (max-width: 800px) {
+  .heroBanner img { width: 175%; max-width: none; transform: translateX(-2%); }
+  .categories a { padding: 18px 8px; font-size: 12px; }
+  .categories a:last-child { grid-column: span 2; }
+  .productSection { padding: 50px 16px; }
+}
