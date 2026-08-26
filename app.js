@@ -1,4 +1,4 @@
-const products=window.PRODUCTS||[],money=n=>new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n);
+const products=(window.PRODUCTS||[]).map(p=>p.offerUntil&&Date.now()>new Date(p.offerUntil).getTime()?{...p,price:p.regularPrice,regularPrice:null,featuredOffer:false}:p),money=n=>new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n);
 let basket=JSON.parse(localStorage.getItem('falucho-cart')||'{}'),activeCategory='all',activeSubcategory='all',query='',sortMode='featured',visibleLimit=30;
 const subcategoryMenus={Alimentos:['Almacén','Lácteos y quesos','Panificados','Golosinas','Conservas','Salsas y aderezos'],Bebidas:['Sin alcohol','Con alcohol'],Limpieza:['Lavadero','Cocina','Baño','Desinfectantes','Elegante']};
 const normalizedText=p=>[p.name,p.brand,p.sku,...(p.categories||[])].join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
