@@ -1,5 +1,6 @@
 const products=(window.PRODUCTS||[]).map(p=>p.offerUntil&&Date.now()>new Date(p.offerUntil).getTime()?{...p,price:p.regularPrice,regularPrice:null,featuredOffer:false}:p),money=n=>new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n);
 let basket=JSON.parse(localStorage.getItem('falucho-cart')||'{}'),activeView='Ofertas',activeSubcategory='all',activeDetail='all',query='',sortMode='featured',visibleLimit=30;
+if(!localStorage.getItem('falucho-combo-id-fix')){['389','390','391','392','393'].forEach(id=>delete basket[id]);localStorage.setItem('falucho-cart',JSON.stringify(basket));localStorage.setItem('falucho-combo-id-fix','1')}
 const sectionCategories=['Alimentos','Bebidas','Limpieza'];
 const detailMenus={Alimentos:['Almacén','Lácteos y quesos','Panificados','Golosinas','Conservas','Salsas y aderezos'],Bebidas:['Sin alcohol','Con alcohol'],Limpieza:['Lavadero','Cocina','Baño','Desinfectantes','Elegante']};
 const normalizedText=p=>[p.name,p.brand,p.sku,...(p.categories||[])].join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
