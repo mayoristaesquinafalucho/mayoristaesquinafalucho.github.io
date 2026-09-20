@@ -3,3 +3,21 @@
 .detailCategoryTabs{display:flex;align-items:center;gap:7px;overflow:auto;margin:-3px 0 12px;padding:0 0 13px}.detailCategoryTabs[hidden]{display:none}.detailCategoryTabs span{color:#667085;font-size:13px;font-weight:700;white-space:nowrap}.detailCategoryTabs button{border:0;border-bottom:2px solid transparent;background:#fff;color:#475467;padding:7px 9px;font:inherit;font-size:13px;font-weight:700;white-space:nowrap;cursor:pointer}.detailCategoryTabs button:hover{color:var(--red)}.detailCategoryTabs button.active{border-bottom-color:var(--red);color:var(--red)}@media(max-width:800px){.detailCategoryTabs{margin-right:-16px}.detailCategoryTabs button{padding:7px;font-size:12px}}
 
 .catalogGrid .weeklyOffer img{object-fit:contain;background:#061d49}
+
+
+/* Borrador: navegación por tipo de cliente */
+.segmentIntro{margin:8px 0 18px;text-align:center}
+.segmentIntro h2{margin:0 0 6px;font-family:"Playfair Display",serif;font-size:clamp(24px,3vw,34px);color:#102b54}
+.segmentIntro p{margin:0;color:#617086}
+.segmentTabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 18px}
+.segmentTabs button{min-height:112px;padding:20px 18px;border:1px solid #dce4ee;border-radius:18px;background:#fff;color:#102b54;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:7px;box-shadow:0 8px 24px rgba(16,43,84,.06);transition:.2s ease}
+.segmentTabs button strong{font-size:18px}
+.segmentTabs button span{font-size:14px;line-height:1.35;color:#617086;font-weight:500}
+.segmentTabs button:hover{transform:translateY(-2px);border-color:#b8c8dc}
+.segmentTabs button.active{background:#102b54;border-color:#102b54;color:#fff;box-shadow:0 12px 30px rgba(16,43,84,.22)}
+.segmentTabs button.active span{color:#dbe7f7}
+.segmentNotice{display:flex!important;align-items:center;gap:14px;margin:0 0 18px;border-left:4px solid #d92c3a;background:#f7f9fc;color:#102b54}
+.segmentNotice b{white-space:nowrap;color:#d92c3a}
+.subCategoryTabs{margin:0 0 18px;padding:14px;border-radius:16px;background:#f4f7fb;align-items:center}
+.subCategoryTabs>span{font-size:13px;font-weight:700;color:#102b54;margin-right:4px}
+@media(max-width:760px){.segmentTabs{grid-template-columns:1fr;gap:10px}.segmentTabs button{min-height:auto;padding:16px 18px}.segmentNotice{align-items:flex-start;flex-direction:column;gap:4px}.subCategoryTabs{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}.subCategoryTabs>span{display:none}}
