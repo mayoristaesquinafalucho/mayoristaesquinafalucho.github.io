@@ -4,6 +4,14 @@ if(alamosUnit){
   alamosUnit.img='assets/vino-alamos-malbec-750ml.png';
 }
 window.PRODUCTS=window.PRODUCTS.filter(product=>product.slug!=='vino-alamos-malbec-x750ml-caja-x6');
+const fernetBranca=window.PRODUCTS.find(product=>product.slug==='aperitivo-fernet-branca-x750ml');
+if(fernetBranca){
+  fernetBranca.price=15500;
+  fernetBranca.boxQuantity=12;
+  fernetBranca.boxUnitPrice=14500;
+  fernetBranca.boxPrice=174000;
+}
+
 
 window.PRODUCTS=(window.PRODUCTS||[]).concat([
   {id:493,slug:'vino-elementos-malbec-x750ml',name:'Vino Elementos Malbec x750ml',price:5250,regularPrice:null,cat:'Bebidas',categories:['Bebidas > Bebidas alcohólicas'],brand:'Elementos',sku:'',description:'',img:'assets/vino-elementos-malbec-750ml.png',featuredOffer:false},
