@@ -37,7 +37,7 @@
       name:'Aceite de girasol El Paisano x900 cc',
       price:2250,regularPrice:null,cat:'Alimentos',
       categories:['Alimentos > Aceites'],brand:'El Paisano',sku:'',
-      description:'',img:'assets/oferta-semanal-18.png',
+      description:'',img:'assets/aceite-girasol-el-paisano-900cc.png',
       featuredOffer:true,offerUntil:until
     });
   }else highlight('aceite-girasol-el-paisano-x900cc');
