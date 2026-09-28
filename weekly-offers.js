@@ -46,10 +46,10 @@
 
   const leche=highlight('leche-larga-vida-gandara-x1lt');
   if(leche){
-    leche.price=1850;
+    leche.price=2030;
     leche.boxQuantity=12;
-    leche.boxUnitPrice=1690;
-    leche.boxPrice=20280;
+    leche.boxUnitPrice=1790;
+    leche.boxPrice=21480;
   }
 
   discount('queso-cremoso-silvia-x-horma',32600);
