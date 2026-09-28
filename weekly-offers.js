@@ -1,5 +1,5 @@
 (() => {
-  const until='2026-09-26T00:00:00-03:00';
+  const until='2026-10-03T00:00:00-03:00';
   const bySlug=slug=>(window.PRODUCTS||[]).find(product=>product.slug===slug);
   const highlight=slug=>{
     const product=bySlug(slug);
@@ -94,20 +94,20 @@
     {
       id:3001,slug:'oferta-yogur-firme-gandara-3-unidades',
       name:'Promo 3 Yogures firmes Gándara x190 g',
-      price:2700,regularPrice:3195,cat:'Alimentos',
+      price:3000,regularPrice:null,cat:'Alimentos',
       categories:['Alimentos > Lácteos y quesos'],brand:'Gándara',sku:'OFERTA-SEM',
-      description:'Oferta semanal válida hasta el viernes 25 de septiembre inclusive.',
+      description:'Oferta semanal válida hasta el viernes 2 de octubre inclusive.',
       img:firme?.img||'',featuredOffer:true,offerOnly:true,offerUntil:until,
-      packLabel:'PROMO 3 UNIDADES',comboItems:['3 yogures firmes por $2.700','Podés combinar frutilla y vainilla']
+      packLabel:'PROMO 3 UNIDADES',comboItems:['3 yogures firmes por $3.000','Podés combinar frutilla y vainilla']
     },
     {
       id:3002,slug:'oferta-yogur-bebible-gandara-2-unidades',
       name:'Promo 2 Yogures bebibles Gándara x900 g',
-      price:3430,regularPrice:4120,cat:'Alimentos',
+      price:3800,regularPrice:null,cat:'Alimentos',
       categories:['Alimentos > Lácteos y quesos'],brand:'Gándara',sku:'OFERTA-SEM',
-      description:'Oferta semanal válida hasta el viernes 25 de septiembre inclusive.',
+      description:'Oferta semanal válida hasta el viernes 2 de octubre inclusive.',
       img:bebible?.img||'',featuredOffer:true,offerOnly:true,offerUntil:until,
-      packLabel:'PROMO 2 UNIDADES',comboItems:['2 yogures bebibles por $3.430','Podés combinar frutilla y vainilla']
+      packLabel:'PROMO 2 UNIDADES',comboItems:['2 yogures bebibles por $3.800','Podés combinar frutilla y vainilla']
     }
   ]);
 })();
