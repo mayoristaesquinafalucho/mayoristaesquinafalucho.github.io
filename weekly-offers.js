@@ -225,4 +225,64 @@
     boxUnitPrice:10410,
     boxPrice:62460
   });
+  // Nuevos destacados de almacén y limpieza
+  [
+    'tostadas-tosti-light',
+    'tostadas-tosti-mediterraneas',
+    'tostadas-tosti-sin-sal',
+    'tostadas-tosti-dulces',
+    'tostadas-tosti-clasicas'
+  ].forEach(slug=>priced(slug,1350));
+
+  priced('edulcorante-si-diet-x500ml',2610);
+
+  priced('papel-higienico-simple-hoja-elegante-x4-rollos-de-30mts',1450,{
+    boxQuantity:12,
+    boxUnitPrice:1300,
+    boxPrice:15600
+  });
+
+  priced('rollo-de-cocina-elegante-x3-rollos-de-50-panos',1620,{
+    boxQuantity:8,
+    boxUnitPrice:1450,
+    boxPrice:11600
+  });
+
+  priced('rollo-de-cocina-elegante-x200mts',2075,{
+    boxQuantity:12,
+    boxUnitPrice:1850,
+    boxPrice:22200
+  });
+
+  // Nuevas ofertas de vinos y espumantes
+  priced('vino-alma-mora-malbec-x750ml',5500,{
+    boxQuantity:6,
+    boxUnitPrice:4999,
+    boxPrice:29994
+  });
+
+  priced('vino-escorihuela-gascon-malbec-x750ml',8415,{
+    boxQuantity:6,
+    boxUnitPrice:7920,
+    boxPrice:47520
+  });
+
+  discounted('champagne-fresita-x750ml',10300,{
+    boxQuantity:6,
+    boxUnitPrice:9300,
+    boxPrice:55800
+  });
+
+  highlight('vino-don-valentin-lacrado-x750ml',{
+    boxQuantity:6,
+    boxUnitPrice:3090,
+    boxPrice:18540
+  });
+
+  highlight('vino-famiglia-malbec-x750ml',{
+    boxQuantity:6,
+    boxUnitPrice:5900,
+    boxPrice:35400
+  });
+
 })();
