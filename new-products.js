@@ -21,3 +21,24 @@ window.PRODUCTS=(window.PRODUCTS||[]).concat([
   {id:497,slug:'salchichas-maneca-x6',name:'Salchichas Maneca x6 unidades',price:950,regularPrice:null,cat:'Alimentos',categories:['Alimentos > Otros'],brand:'Maneca',sku:'',description:'Paquete de 6 salchichas, 190 g.',img:'assets/salchichas-maneca-x6.png',featuredOffer:false},
   {id:498,slug:'harina-0000-campodonico-25kg',name:'Harina 0000 Campodónico x25 kg',price:28900,regularPrice:null,cat:'Alimentos',categories:['Alimentos > Harinas'],brand:'Campodónico',sku:'',description:'Bolsa de harina 0000 de 25 kg.',img:'assets/harina-0000-campodonico-25kg.png',featuredOffer:false}
 ]);
+
+
+if(!window.PRODUCTS.find(product=>product.slug==='vino-alma-mora-malbec-x750ml')){
+  window.PRODUCTS.push({
+    id:5001,
+    slug:'vino-alma-mora-malbec-x750ml',
+    name:'Vino Alma Mora Malbec x750ml',
+    price:5500,
+    regularPrice:null,
+    cat:'Bebidas',
+    categories:['Bebidas > Vinos'],
+    brand:'Alma Mora',
+    sku:'',
+    description:'',
+    img:'https://vinotecaligier.com/media/catalog/product/cache/73269a27812eefec516431430aa0b457/b/e/be70239_base.jpg',
+    featuredOffer:false,
+    boxQuantity:6,
+    boxUnitPrice:4999,
+    boxPrice:29994
+  });
+}
