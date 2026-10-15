@@ -42,3 +42,19 @@ if(!window.PRODUCTS.find(product=>product.slug==='vino-alma-mora-malbec-x750ml')
     boxPrice:29994
   });
 }
+
+
+// Precios vigentes de Chandon: unidad y caja x6.
+const chandonCatalogPrices = {
+  'champagne-chandon-aperitif-x750ml': 15500,
+  'champagne-chandon-delice-x750ml': 15500,
+  'champagne-chandon-extra-brut-x750ml': 15500,
+  'caja-champagne-chandon-aperitif-x6': 89400,
+  'caja-champagne-chandon-delice-x6': 89400,
+  'caja-champagne-chandon-extra-brut-x6': 89400
+};
+
+Object.entries(chandonCatalogPrices).forEach(([slug, price]) => {
+  const product = window.PRODUCTS.find(item => item.slug === slug);
+  if (product) product.price = price;
+});
