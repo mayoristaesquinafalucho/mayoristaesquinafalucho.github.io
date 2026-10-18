@@ -25,3 +25,13 @@
 .checkoutError{margin:0 0 10px;color:var(--red);font-size:12px;font-weight:700}.checkoutError[hidden]{display:none}
 @media(max-width:1100px){.catalogTools{grid-template-columns:1fr 1fr}.catalogTools .searchField{grid-column:1/-1}.infoStrip{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:800px){.catalogTools{grid-template-columns:1fr}.catalogTools .searchField{grid-column:auto}.infoStrip{grid-template-columns:1fr}.buyerFormGrid{grid-template-columns:1fr}.buyerFormGrid .full{grid-column:auto}.cartFoot{max-height:72vh}.actions #cartBtn{font-size:12px}}
+
+/* Banner compacto y accesos de compra */
+.heroBanner{position:relative;height:clamp(270px,29vw,380px)}
+.heroBanner img{width:100%;height:100%;object-fit:cover;object-position:center}
+.heroCatalogBtn{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);min-width:170px;padding:13px 22px;border:2px solid #fff;background:var(--red);color:#fff;text-align:center;font-weight:800;box-shadow:0 8px 24px #0004}
+.heroCatalogBtn:hover{background:#fff;color:var(--blue)}
+.floatingCart{position:fixed;left:22px;bottom:22px;z-index:25;display:flex;align-items:center;gap:9px;border:0;border-radius:999px;background:var(--blue);color:#fff;padding:12px 17px;box-shadow:0 8px 28px #0003;font:inherit;cursor:pointer;transition:.2s}
+.floatingCart:hover{transform:translateY(-2px)}.floatingCart.hidden{opacity:0;pointer-events:none;transform:translateY(12px)}
+.floatingCart span{font-size:20px}.floatingCart b{font-size:13px}.floatingCart em{padding-left:9px;border-left:1px solid #ffffff55;font-size:12px;font-style:normal;font-weight:700}
+@media(max-width:700px){.heroBanner{height:220px}.heroBanner img{object-fit:cover}.heroCatalogBtn{bottom:14px;min-width:150px;padding:11px 18px;font-size:13px}.floatingCart{left:14px;bottom:14px;max-width:calc(100vw - 90px);padding:11px 13px}.floatingCart b{display:none}.floatingCart em{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
