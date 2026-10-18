@@ -91,12 +91,21 @@
   priced('jugo-baggio-multifruta-x1lt',1660);
 
   [
-    'pack-agua-fresh-pomelo-15l-x6',
-    'pack-agua-fresh-naranja-15l-x6',
-    'pack-agua-saborizada-fresh-manzana-x1-5lts-x-6-unidades',
-    'pack-agua-saborizada-fresh-pera-x1-5lts-x-6-unidades',
-    'pack-agua-saborizada-fresh-mix-frutal-x1-5lts-x-6-unidades'
-  ].forEach(slug=>priced(slug,6900));
+    'agua-saborizada-fresh-pomelo-x15lts',
+    'agua-saborizada-fresh-naranja-x15lts',
+    'agua-saborizada-fresh-manzana-x1-5lts',
+    'agua-saborizada-fresh-pera-x1-5lts',
+    'agua-saborizada-fresh-mix-frutal-x1-5lts'
+  ].forEach(slug=>{
+    const product=bySlug(slug);
+    if(product){
+      priced(slug,product.price,{
+        boxQuantity:6,
+        boxUnitPrice:1150,
+        boxPrice:6900
+      });
+    }
+  });
 
   const speed=bySlug('speed-xl-pack-12')||bySlug('speed-xl-x-unidad');
   upsertPromo('oferta-speed-xl-pack-x12',{
