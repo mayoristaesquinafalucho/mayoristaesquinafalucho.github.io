@@ -27,7 +27,7 @@
 @media(max-width:800px){.catalogTools{grid-template-columns:1fr}.catalogTools .searchField{grid-column:auto}.infoStrip{grid-template-columns:1fr}.buyerFormGrid{grid-template-columns:1fr}.buyerFormGrid .full{grid-column:auto}.cartFoot{max-height:72vh}.actions #cartBtn{font-size:12px}}
 
 /* Banner compacto y accesos de compra */
-.heroBanner{position:relative;height:clamp(270px,29vw,380px);margin-bottom:34px}
+.heroBanner{position:relative;height:clamp(270px,29vw,380px);margin-bottom:34px;overflow:visible}
 .heroBanner img{width:100%;height:100%;object-fit:cover;object-position:center}
 .heroCatalogBtn{position:absolute;left:50%;bottom:-22px;z-index:2;transform:translateX(-50%);min-width:170px;padding:13px 22px;border:2px solid #fff;background:var(--red);color:#fff;text-align:center;font-weight:800;box-shadow:0 8px 24px #0004}
 .heroCatalogBtn:hover{background:#fff;color:var(--blue)}
