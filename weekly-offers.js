@@ -60,6 +60,32 @@
 
   priced('alfajor-triple-negro-fantoche-x75gr',860);
 
+  const firme=bySlug('yogur-firme-frutilla-gandara-x190gr')||bySlug('yogur-firme-vainilla-gandara-x190gr');
+  upsertPromo('oferta-yogur-firme-gandara-3-unidades',{
+    id:3001,
+    name:'Promo 3 Yogures firmes Gándara x190 g',
+    price:3000,
+    cat:'Alimentos',
+    categories:['Alimentos > Lácteos y quesos'],
+    brand:'Gándara',
+    img:firme?.img||'',
+    packLabel:'PROMO 3 UNIDADES',
+    comboItems:['3 yogures firmes por $3.000','Podés combinar frutilla y vainilla']
+  });
+
+  const cereal=bySlug('yogur-con-cereal-gandara-x170gr');
+  upsertPromo('oferta-yogur-cereal-gandara-2-unidades',{
+    id:3003,
+    name:'Promo 2 Yogures con cereal Gándara x170 g',
+    price:2500,
+    cat:'Alimentos',
+    categories:['Alimentos > Lácteos y quesos'],
+    brand:'Gándara',
+    img:cereal?.img||'',
+    packLabel:'PROMO 2 UNIDADES',
+    comboItems:['2 yogures con cereal por $2.500']
+  });
+
   const yogurVidrio=
     bySlug('yogur-vidrio-vainilla-sin-colchon-gandara-x160gr')||
     bySlug('yogur-vidrio-frutilla-sin-colchon-gandara-x160gr');
@@ -85,6 +111,41 @@
     img:bySlug('oferta-aceite-paisano-2-unidades')?.img||'assets/oferta-semanal-18.png',
     packLabel:'PROMO 2 UNIDADES',
     comboItems:['2 aceites de girasol por $4.500']
+  });
+
+  priced('leche-larga-vida-gandara-x1lt',2030,{
+    boxQuantity:12,
+    boxUnitPrice:1790,
+    boxPrice:21480
+  });
+
+  priced('pure-de-tomate-la-huerta-x520gr',830,{
+    boxQuantity:12,
+    boxUnitPrice:790,
+    boxPrice:9480
+  });
+
+  priced('edulcorante-si-diet-x500ml',2610);
+
+  [
+    'tostadas-tosti-light',
+    'tostadas-tosti-mediterraneas',
+    'tostadas-tosti-sin-sal',
+    'tostadas-tosti-dulces',
+    'tostadas-tosti-clasicas'
+  ].forEach(slug=>priced(slug,1350));
+
+  // Limpieza
+  priced('papel-higienico-simple-hoja-elegante-x4-rollos-de-30mts',1450,{
+    boxQuantity:12,
+    boxUnitPrice:1300,
+    boxPrice:15600
+  });
+
+  priced('rollo-de-cocina-elegante-x3-rollos-de-50-panos',1620,{
+    boxQuantity:8,
+    boxUnitPrice:1450,
+    boxPrice:11600
   });
 
   // Bebidas sin alcohol
