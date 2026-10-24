@@ -39,3 +39,18 @@
 
 /* En celular los filtros se desplazan con la página para no tapar los productos. */
 @media(max-width:800px){.catalogTools{position:static;top:auto;z-index:auto;box-shadow:none}}
+
+
+/* Carrito móvil: panel claro, fácil de cerrar y sin quedar sobre el catálogo. */
+.cartHead button span{display:none}
+.add.added{background:#16834a;color:#fff}
+body.cartOpen{overflow:hidden}
+@media(max-width:800px){
+  .cart{top:auto;bottom:0;width:100%;height:min(92dvh,840px);border-radius:20px 20px 0 0;transform:translateY(105%);box-shadow:0 -18px 60px #0003}
+  .cart.open{transform:translateY(0)}
+  .cartHead{position:sticky;top:0;z-index:3;align-items:center;padding:16px 18px;background:#fff;border-radius:20px 20px 0 0}
+  .cartHead button{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;border:1px solid #cfd4dc;border-radius:999px;background:#fff;color:var(--blue);font:700 12px 'DM Sans',sans-serif}
+  .cartHead button span{display:inline}
+  .cartHead button b{font-size:22px;line-height:1}
+  .cartFoot{padding:16px 18px;max-height:none}
+}
