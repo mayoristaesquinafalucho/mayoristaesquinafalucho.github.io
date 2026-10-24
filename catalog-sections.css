@@ -35,3 +35,7 @@
 .floatingCart:hover{transform:translateY(-2px)}.floatingCart.hidden{opacity:0;pointer-events:none;transform:translateY(12px)}
 .floatingCart span{font-size:20px}.floatingCart b{font-size:13px}.floatingCart em{padding-left:9px;border-left:1px solid #ffffff55;font-size:12px;font-style:normal;font-weight:700}
 @media(max-width:700px){.heroBanner{height:220px;margin-bottom:28px}.heroBanner img{object-fit:cover}.heroCatalogBtn{bottom:-18px;min-width:150px;padding:11px 18px;font-size:13px}.floatingCart{left:14px;bottom:14px;max-width:calc(100vw - 90px);padding:11px 13px}.floatingCart b{display:none}.floatingCart em{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+
+
+/* En celular los filtros se desplazan con la página para no tapar los productos. */
+@media(max-width:800px){.catalogTools{position:static;top:auto;z-index:auto;box-shadow:none}}
