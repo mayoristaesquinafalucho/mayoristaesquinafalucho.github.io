@@ -46,6 +46,35 @@ document.addEventListener('click',event=>{const close=event.target.closest('[dat
 document.addEventListener('click',event=>{if(event.target.closest('[data-view],[data-buyer]'))activeBrand='all'},true);
 document.querySelector('#searchBtn').onclick=()=>{document.querySelector('#catalogo').scrollIntoView();document.querySelector('#search').focus()};document.querySelector('#cartBtn').onclick=document.querySelector('#floatingCart').onclick=()=>openCart();document.querySelector('#closeCart').onclick=document.querySelector('#overlay').onclick=()=>openCart(false);document.addEventListener('keydown',event=>{if(event.key==='Escape')openCart(false)});search.oninput=e=>{query=e.target.value.trim();visibleLimit=30;renderCatalog()};sort.onchange=e=>{sortMode=e.target.value;visibleLimit=30;renderCatalog()};purchaseType.onchange=e=>{purchaseMode=e.target.value;visibleLimit=30;renderCatalog()};loadMore.onclick=()=>{visibleLimit+=30;renderCatalog()};clearFilters.onclick=()=>{activeView='Alimentos';activeSubcategory='all';activeDetail='all';activeBrand='all';buyerMode='';purchaseMode='all';query='';sortMode='featured';search.value='';sort.value='featured';purchaseType.value='all';visibleLimit=30;renderSubcategoryTabs();renderCatalog()};
 brandFilter.onchange=e=>{activeBrand=e.target.value;visibleLimit=30;renderCatalog()};
-checkout.onclick=()=>{const entries=Object.entries(basket).map(([key,quantity])=>({key,quantity,...basketData(key)})).filter(e=>e.product&&e.price);if(!entries.length)return;const name=document.querySelector('#buyerName').value.trim(),location=document.querySelector('#buyerLocation').value.trim(),type=document.querySelector('#buyerType').value,delivery=document.querySelector('#deliveryType').value,notes=document.querySelector('#buyerNotes').value.trim(),error=document.querySelector('#checkoutError');if(!name||!location){error.hidden=false;(!name?document.querySelector('#buyerName'):document.querySelector('#buyerLocation')).focus();return}error.hidden=true;const lines=entries.map(({quantity,product,format,price})=>`• ${quantity} x ${product.name} (${productFormat(product,format)}) — ${money(price*quantity)}`),total=entries.reduce((s,e)=>s+e.price*e.quantity,0),customer=`Nombre: ${name}\nLocalidad: ${location}\nTipo de cliente: ${type}\nEntrega: ${delivery}${notes?`\nObservaciones: ${notes}`:''}`,message=`Hola, quiero hacer este pedido:\n\n${lines.join('\n')}\n\nTotal estimado: ${money(total)}\n\n${customer}\n\n¿Me confirman stock, precio final y envío?`;localStorage.setItem('falucho-buyer',JSON.stringify({name,location,type,delivery,notes}));window.open(`https://wa.me/541164591826?text=${encodeURIComponent(message)}`,'_blank')};
+const orderEndpoint="https://pedidos-falucho-receptor.solwheeler3.chatgpt.site/api/orders";
+checkout.onclick=async()=>{
+  const entries=Object.entries(basket).map(([key,quantity])=>({key,quantity,...basketData(key)})).filter(e=>e.product&&e.price);
+  if(!entries.length)return;
+  const name=document.querySelector("#buyerName").value.trim(),location=document.querySelector("#buyerLocation").value.trim(),type=document.querySelector("#buyerType").value,delivery=document.querySelector("#deliveryType").value,notes=document.querySelector("#buyerNotes").value.trim(),error=document.querySelector("#checkoutError");
+  if(!name||!location){error.textContent="Completá tu nombre y localidad para enviar el pedido.";error.hidden=false;(!name?document.querySelector("#buyerName"):document.querySelector("#buyerLocation")).focus();return}
+  error.hidden=true;
+  const lines=entries.map(({quantity,product,format,price})=>"• "+quantity+" x "+product.name+" ("+productFormat(product,format)+") — "+money(price*quantity)),total=entries.reduce((sum,item)=>sum+item.price*item.quantity,0),customer="Nombre: "+name+"\nLocalidad: "+location+"\nTipo de cliente: "+type+"\nEntrega: "+delivery+(notes?"\nObservaciones: "+notes:""),clientOrderId=localStorage.getItem("falucho-pending-order-id")||("web-"+Date.now()+"-"+Math.random().toString(36).slice(2,12));
+  localStorage.setItem("falucho-pending-order-id",clientOrderId);
+  const whatsappWindow=window.open("about:blank","_blank");
+  checkout.disabled=true;
+  try{
+    const response=await fetch(orderEndpoint,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({clientOrderId,customerName:name,locality:location,buyerType:type,deliveryType:delivery,notes,total,items:entries.map(({quantity,product,format,price})=>({productCode:String(product.id),productName:product.name,format,quantity,unitsPerBox:product.boxQuantity||null,price,lineTotal:price*quantity})),website:""})});
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok||!result.ok)throw new Error(result.error||"No se pudo registrar el pedido");
+    const message="Hola, quiero hacer este pedido:\n\n"+lines.join("\n")+"\n\nTotal estimado: "+money(total)+"\n\n"+customer+"\n\nReferencia del pedido: "+clientOrderId+"\n\n¿Me confirman stock, precio final y envío?";
+    localStorage.setItem("falucho-buyer",JSON.stringify({name,location,type,delivery,notes}));
+    localStorage.removeItem("falucho-pending-order-id");
+    basket={};
+    save();
+    openCart(false);
+    const whatsappUrl="https://wa.me/541164591826?text="+encodeURIComponent(message);
+    if(whatsappWindow)whatsappWindow.location.href=whatsappUrl;else window.location.href=whatsappUrl;
+  }catch(failure){
+    if(whatsappWindow)whatsappWindow.close();
+    error.textContent="No pudimos guardar el pedido. Probá nuevamente; el carrito quedó guardado.";
+    error.hidden=false;
+    console.error(failure);
+  }finally{checkout.disabled=false}
+};
 try{const savedBuyer=JSON.parse(localStorage.getItem('falucho-buyer')||'{}');document.querySelector('#buyerName').value=savedBuyer.name||'';document.querySelector('#buyerLocation').value=savedBuyer.location||'';document.querySelector('#buyerType').value=savedBuyer.type||'Hogar';document.querySelector('#deliveryType').value=savedBuyer.delivery||'A coordinar';document.querySelector('#buyerNotes').value=savedBuyer.notes||''}catch{}
 renderSubcategoryTabs();renderCatalog();renderCart();openCart(false);window.addEventListener('pageshow',()=>openCart(false));
