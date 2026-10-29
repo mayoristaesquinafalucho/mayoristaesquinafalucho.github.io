@@ -72,5 +72,5 @@ body.cartOpen{overflow:hidden}
 
 /* Las composiciones horizontales de los combos 8 y 9 se muestran completas, sin un gran espacio vacío dentro de la tarjeta. */
 .catalogGrid .wideComboImage .productImage{aspect-ratio:1024/630}
-.catalogGrid .wideComboImage .productImage img{width:100%;height:100%;aspect-ratio:auto;padding:6px;object-fit:contain}
+.catalogGrid .wideComboImage .productImage img{width:100%;height:100%;box-sizing:border-box;aspect-ratio:auto;padding:6px;object-fit:contain}
 @media(max-width:800px){.catalogGrid .wideComboImage .productImage{aspect-ratio:1024/630}.catalogGrid .wideComboImage .productImage img{padding:4px}}
