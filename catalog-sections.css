@@ -69,3 +69,8 @@ body.cartOpen{overflow:hidden}
 .catalogTools{position:static;top:auto;z-index:auto;display:block;box-shadow:none}
 .catalogTools>label:not(.searchField){display:none}
 .catalogTools .searchField{display:block;width:100%}
+
+/* Las composiciones horizontales de los combos 8 y 9 se muestran completas, sin un gran espacio vacío dentro de la tarjeta. */
+.catalogGrid .wideComboImage .productImage{aspect-ratio:1024/630}
+.catalogGrid .wideComboImage .productImage img{padding:6px;object-fit:contain}
+@media(max-width:800px){.catalogGrid .wideComboImage .productImage{aspect-ratio:1024/630}.catalogGrid .wideComboImage .productImage img{padding:4px}}
