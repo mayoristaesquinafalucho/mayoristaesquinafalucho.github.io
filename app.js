@@ -55,7 +55,6 @@ checkout.onclick=async()=>{
   error.hidden=true;
   const lines=entries.map(({quantity,product,format,price})=>"• "+quantity+" x "+product.name+" ("+productFormat(product,format)+") — "+money(price*quantity)),total=entries.reduce((sum,item)=>sum+item.price*item.quantity,0),customer="Nombre: "+name+"\nLocalidad: "+location+"\nTipo de cliente: "+type+"\nEntrega: "+delivery+(notes?"\nObservaciones: "+notes:""),clientOrderId=localStorage.getItem("falucho-pending-order-id")||("web-"+Date.now()+"-"+Math.random().toString(36).slice(2,12));
   localStorage.setItem("falucho-pending-order-id",clientOrderId);
-  const whatsappWindow=window.open("about:blank","_blank");
   checkout.disabled=true;
   try{
     const response=await fetch(orderEndpoint,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({clientOrderId,customerName:name,locality:location,buyerType:type,deliveryType:delivery,notes,total,items:entries.map(({quantity,product,format,price})=>({productCode:String(product.id),productName:product.name,format,quantity,unitsPerBox:product.boxQuantity||null,price,lineTotal:price*quantity})),website:""})});
@@ -68,9 +67,8 @@ checkout.onclick=async()=>{
     save();
     openCart(false);
     const whatsappUrl="https://wa.me/541164591826?text="+encodeURIComponent(message);
-    if(whatsappWindow)whatsappWindow.location.href=whatsappUrl;else window.location.href=whatsappUrl;
+    window.location.assign(whatsappUrl);
   }catch(failure){
-    if(whatsappWindow)whatsappWindow.close();
     error.textContent="No pudimos guardar el pedido. Probá nuevamente; el carrito quedó guardado.";
     error.hidden=false;
     console.error(failure);
