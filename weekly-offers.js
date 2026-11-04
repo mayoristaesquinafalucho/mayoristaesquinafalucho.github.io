@@ -43,10 +43,10 @@
   };
 
   // Alimentos
-  priced('fideos-tirabuzon-sol-pampeano-x500gr-4kbph',850,{
+  priced('fideos-tirabuzon-sol-pampeano-x500gr-4kbph',960,{
     boxQuantity:15,
-    boxUnitPrice:800,
-    boxPrice:12000
+    boxUnitPrice:850,
+    boxPrice:12750
   });
 
   priced('azucar-gury-x1kg',1200,{
