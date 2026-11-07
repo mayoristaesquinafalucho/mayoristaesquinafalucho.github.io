@@ -6,7 +6,7 @@ if(alamosUnit){
 window.PRODUCTS=window.PRODUCTS.filter(product=>product.slug!=='vino-alamos-malbec-x750ml-caja-x6');
 const fernetBranca=window.PRODUCTS.find(product=>product.slug==='aperitivo-fernet-branca-x750ml');
 if(fernetBranca){
-  fernetBranca.price=16500;
+  fernetBranca.price=17000;
   fernetBranca.boxQuantity=12;
   fernetBranca.boxUnitPrice=16000;
   fernetBranca.boxPrice=192000;
