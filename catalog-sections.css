@@ -130,7 +130,7 @@ body.cartOpen{overflow:hidden}
 
 /* Banner del local: toda el área lleva al catálogo */
 .heroBanner.heroBannerStore{position:relative;display:block;height:clamp(340px,43vw,570px);margin:0;overflow:hidden;background:var(--blue);color:#fff}
-.heroBannerStore img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.heroBannerStore img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 72%}
 .heroBannerShade{position:absolute;inset:0;background:linear-gradient(90deg,#061d49e8 0%,#061d49bf 35%,#061d4966 64%,#061d4926 100%);transition:.25s}
 .heroBannerContent{position:absolute;top:50%;left:max(8vw,28px);z-index:1;display:flex;max-width:690px;transform:translateY(-50%);flex-direction:column;align-items:flex-start}
 .heroBannerContent small{margin-bottom:14px;font-size:clamp(11px,1.2vw,16px);font-weight:800;letter-spacing:.14em}
@@ -140,4 +140,4 @@ body.cartOpen{overflow:hidden}
 .heroCatalogBtn b{display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:#fff;color:var(--blue);font-size:22px}
 .heroBannerStore:hover .heroBannerShade{background:linear-gradient(90deg,#061d49f0 0%,#061d49c8 35%,#061d4970 64%,#061d4933 100%)}
 .heroBannerStore:hover .heroCatalogBtn{background:#fff;color:var(--blue);transform:translateY(-2px)}
-@media(max-width:700px){.heroBanner.heroBannerStore{height:470px;margin:0}.heroBannerStore img{width:100%;height:100%;object-fit:cover;object-position:62% center}.heroBannerShade{background:linear-gradient(0deg,#061d49f2 0%,#061d49bd 52%,#061d493f 100%)}.heroBannerContent{top:auto;right:20px;bottom:34px;left:20px;transform:none}.heroBannerContent strong{font-size:clamp(38px,12vw,54px)}.heroBannerContent small{font-size:10px;line-height:1.5}.heroBannerText{margin-top:14px;font-size:15px}.heroBannerStore .heroCatalogBtn{margin-top:20px;padding:9px 12px 9px 15px;font-size:13px}.heroCatalogBtn b{width:27px;height:27px}}
+@media(max-width:700px){.heroBanner.heroBannerStore{height:470px;margin:0}.heroBannerStore img{width:100%;height:100%;object-fit:cover;object-position:62% 72%;transform:scale(1.16)}.heroBannerShade{background:linear-gradient(0deg,#061d49f2 0%,#061d49bd 52%,#061d493f 100%)}.heroBannerContent{top:auto;right:20px;bottom:34px;left:20px;transform:none}.heroBannerContent strong{font-size:clamp(38px,12vw,54px)}.heroBannerContent small{font-size:10px;line-height:1.5}.heroBannerText{margin-top:14px;font-size:15px}.heroBannerStore .heroCatalogBtn{margin-top:20px;padding:9px 12px 9px 15px;font-size:13px}.heroCatalogBtn b{width:27px;height:27px}}
