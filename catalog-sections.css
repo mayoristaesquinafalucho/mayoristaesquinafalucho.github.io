@@ -77,13 +77,24 @@ body.cartOpen{overflow:hidden}
 
 
 /* Inicio editorial: destacados, videos, marcas y formulario */
-.homeFeatured,.brandsHome{padding:72px max(8vw,28px);background:#fff}
+.homeFeatured,.brandsHome,.homeCombos{padding:72px max(8vw,28px);background:#fff}
+.homeCombos{padding-top:54px;background:#fff}
 .homeFeatured{background:var(--cream)}
 .homeSectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:28px}
 .homeSectionHead h2,.offersSignup h2{margin:6px 0 8px;color:var(--blue);font:600 clamp(34px,4vw,54px)/1.05 'Playfair Display',serif}
 .homeSectionHead p:not(.eyebrow){max-width:660px;margin:0;color:#667085;line-height:1.55}
 .sectionLink{border:1px solid var(--blue);background:transparent;color:var(--blue);padding:12px 18px;font:700 13px 'DM Sans',sans-serif;cursor:pointer;white-space:nowrap}
 .sectionLink:hover{background:var(--blue);color:#fff}
+.homeComboGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.homeComboCard{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 12px 32px #061d4910;transition:.2s}
+.homeComboCard:hover{border-color:#b7c3d5;box-shadow:0 18px 42px #061d491c;transform:translateY(-3px)}
+.homeComboImage{aspect-ratio:16/10;overflow:hidden;background:#f7f7f5}
+.homeComboImage img{width:100%;height:100%;padding:8px;box-sizing:border-box;object-fit:contain}
+.homeComboBody{display:grid;grid-template-columns:1fr auto;align-items:end;gap:7px 14px;padding:18px}
+.homeComboBody small{grid-column:1/-1;color:var(--red);font-size:10px;font-weight:800;letter-spacing:.12em}
+.homeComboBody h3{grid-column:1/-1;margin:0;color:var(--blue);font:700 18px/1.25 'DM Sans',sans-serif}
+.homeComboPrice{color:var(--blue);font:800 24px/1 'DM Sans',sans-serif}
+.comboCardLink{padding:9px 14px;border-radius:999px}
 .homeHighlightGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .homeHighlightGrid .card{display:flex;flex-direction:column;border:1px solid var(--line);box-shadow:0 8px 24px #061d490d}
 .homeHighlightGrid .cardBody{display:flex;flex:1;flex-direction:column}
@@ -108,5 +119,5 @@ body.cartOpen{overflow:hidden}
 .offersSignup label span{display:block;margin-bottom:6px;color:#667085;font-size:11px;font-weight:700}
 .offersSignup input,.offersSignup select{width:100%;height:46px;border:1px solid #cfd4dc;background:#fff;padding:0 12px;font:inherit}
 .offersSignup form .btn{grid-column:1/-1;border:0;font:700 14px 'DM Sans',sans-serif}
-@media(max-width:1100px){.homeHighlightGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.brandShowcase{grid-template-columns:repeat(4,minmax(0,1fr))}.reelsRail{grid-template-columns:repeat(3,320px);justify-content:start;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}.reelCard{scroll-snap-align:start}}
-@media(max-width:800px){.homeFeatured,.brandsHome,.comboReels{padding:50px 16px}.homeSectionHead{align-items:flex-start;flex-direction:column;gap:16px}.sectionLink{width:100%}.homeHighlightGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.reelsRail{grid-template-columns:repeat(3,minmax(280px,86vw));margin-right:-16px}.reelCard{min-height:470px;padding:8px}.brandShowcase{display:flex;overflow-x:auto;margin-right:-16px;padding:2px 16px 12px 0;scroll-snap-type:x mandatory}.brandTile{flex:0 0 145px;scroll-snap-align:start}.offersSignup{grid-template-columns:1fr;gap:25px;padding:50px 16px}.offersSignup form{grid-template-columns:1fr;padding:18px}.offersSignup form .btn{grid-column:auto}}
+@media(max-width:1100px){.homeComboGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.homeHighlightGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.brandShowcase{grid-template-columns:repeat(4,minmax(0,1fr))}.reelsRail{grid-template-columns:repeat(3,320px);justify-content:start;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}.reelCard{scroll-snap-align:start}}
+@media(max-width:800px){.homeFeatured,.brandsHome,.homeCombos,.comboReels{padding:50px 16px}.homeCombos{padding-top:38px}.homeSectionHead{align-items:flex-start;flex-direction:column;gap:16px}.sectionLink{width:100%}.homeComboGrid{display:flex;gap:12px;overflow-x:auto;margin-right:-16px;padding:2px 16px 16px 0;scroll-snap-type:x mandatory}.homeComboCard{flex:0 0 min(82vw,330px);scroll-snap-align:start}.homeComboCard:hover{transform:none}.homeComboBody{padding:15px}.homeComboBody h3{font-size:16px}.homeComboPrice{font-size:21px}.comboCardLink{width:auto}.homeHighlightGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.reelsRail{grid-template-columns:repeat(3,minmax(280px,86vw));margin-right:-16px}.reelCard{min-height:470px;padding:8px}.brandShowcase{display:flex;overflow-x:auto;margin-right:-16px;padding:2px 16px 12px 0;scroll-snap-type:x mandatory}.brandTile{flex:0 0 145px;scroll-snap-align:start}.offersSignup{grid-template-columns:1fr;gap:25px;padding:50px 16px}.offersSignup form{grid-template-columns:1fr;padding:18px}.offersSignup form .btn{grid-column:auto}}
