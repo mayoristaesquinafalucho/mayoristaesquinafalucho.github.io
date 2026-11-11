@@ -181,13 +181,20 @@ body.cartOpen{overflow:hidden}
 
 .homeComboGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .homeComboCard{display:grid;grid-template-columns:46% 54%;min-height:340px}
-.homeComboImage{height:100%;aspect-ratio:auto;border-right:1px solid var(--line)}
+.homeComboImage{position:relative;height:100%;aspect-ratio:auto;border-right:1px solid var(--line);cursor:pointer}
 .homeComboImage img{padding:10px}
+.comboImageHint{position:absolute;right:12px;bottom:12px;padding:7px 10px;border-radius:999px;background:#061d49e8;color:#fff;font-size:10px;font-weight:800;opacity:0;transform:translateY(4px);transition:.2s}
+.homeComboCard:hover .comboImageHint{opacity:1;transform:none}
 .homeComboBody{display:flex;align-items:stretch;flex-direction:column;gap:9px;padding:20px}
 .homeComboBody small,.homeComboBody h3{grid-column:auto}
 .homeComboBody h3{font-size:19px}
-.homeComboBody ul{margin:0;padding-left:18px;color:#667085;font-size:11px;line-height:1.45}
-.homeComboBody li+li{margin-top:3px}.homeComboBody .moreItems{color:var(--blue);font-weight:800}
+.homeComboDetails{border:1px solid #dbe2ec;border-radius:12px;background:#f8fafc;overflow:hidden}
+.homeComboDetails summary{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;color:var(--blue);font-size:12px;font-weight:800;cursor:pointer;list-style:none}
+.homeComboDetails summary::-webkit-details-marker{display:none}
+.homeComboDetails summary span{display:grid;width:22px;height:22px;place-items:center;border-radius:50%;background:#e9eef6;font-size:18px;line-height:1;transition:.2s}
+.homeComboDetails[open] summary span{transform:rotate(45deg);background:var(--red);color:#fff}
+.homeComboBody ul{margin:0;padding:0 30px 12px;color:#667085;font-size:11px;line-height:1.45}
+.homeComboBody li+li{margin-top:4px}
 .homeComboPrice{margin-top:auto;font-size:26px}
 .homeComboBody .compactComposer{margin-top:3px}
 .compactComposer .amountFields{grid-template-columns:1fr}
@@ -201,6 +208,6 @@ body.cartOpen{overflow:hidden}
   .catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catalogGrid .cardBody{padding:11px}.catalogGrid .card h3{font-size:13px}
   .purchasePrices{grid-template-columns:1fr}.purchasePrices .purchasePrice:only-child{grid-column:auto}.purchasePrice{min-height:0}.pairPurchasePrice strong{font-size:18px}
   .amountFields{grid-template-columns:1fr}.amountField:only-child{grid-column:auto}.orderComposer .cardQty{grid-template-columns:27px minmax(30px,1fr) 27px}
-  .homeComboCard{display:flex;min-height:0;flex-direction:column}.homeComboImage{height:auto;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}.homeComboBody{padding:16px}.homeComboBody ul{font-size:10px}.homeComboPrice{font-size:23px}
+  .homeComboCard{display:flex;min-height:0;flex-direction:column}.homeComboImage{height:auto;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}.comboImageHint{opacity:1;transform:none}.homeComboBody{padding:16px}.homeComboBody ul{font-size:10px}.homeComboPrice{font-size:23px}
   .homeHighlightGrid .purchasePrices{grid-template-columns:1fr}.homeHighlightGrid .amountFields{grid-template-columns:1fr}
 }
