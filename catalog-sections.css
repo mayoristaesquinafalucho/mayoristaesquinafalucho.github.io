@@ -141,3 +141,66 @@ body.cartOpen{overflow:hidden}
 .heroBannerStore:hover .heroBannerShade{background:linear-gradient(90deg,#061d49f0 0%,#061d49c8 35%,#061d4970 64%,#061d4933 100%)}
 .heroBannerStore:hover .heroCatalogBtn{background:#fff;color:var(--blue);transform:translateY(-2px)}
 @media(max-width:700px){.heroBanner.heroBannerStore{height:470px;margin:0}.heroBannerStore img{width:100%;height:100%;object-fit:cover;object-position:62% 72%;transform:scale(1.16)}.heroBannerShade{background:linear-gradient(0deg,#061d49f2 0%,#061d49bd 52%,#061d493f 100%)}.heroBannerContent{top:auto;right:20px;bottom:34px;left:20px;transform:none}.heroBannerContent strong{font-size:clamp(38px,12vw,54px)}.heroBannerContent small{font-size:10px;line-height:1.5}.heroBannerText{margin-top:14px;font-size:15px}.heroBannerStore .heroCatalogBtn{margin-top:20px;padding:9px 12px 9px 15px;font-size:13px}.heroCatalogBtn b{width:27px;height:27px}}
+
+/* Compra clara: marca primero, cantidades por unidad y caja */
+.filterFlow{margin:2px 0 18px;padding:18px;border:1px solid var(--line);background:#faf9f7}
+.filterLabel,.subCategoryTabs>span{display:block;flex:0 0 100%;margin-bottom:10px;color:var(--blue);font-size:12px;font-weight:800}
+.brandFilterChips{display:flex;gap:8px;overflow-x:auto;padding:1px 0 14px;scrollbar-width:thin}
+.brandFilterChips button{flex:0 0 auto;border:1px solid #cfd4dc;border-radius:999px;background:#fff;color:#475467;padding:9px 15px;font:700 12px 'DM Sans',sans-serif;cursor:pointer}
+.brandFilterChips button:hover{border-color:var(--red);color:var(--red)}
+.brandFilterChips button.active{border-color:var(--blue);background:var(--blue);color:#fff}
+.filterFlow .subCategoryTabs{flex-wrap:wrap;margin:4px 0 8px;padding:13px 0 5px;border-top:1px solid var(--line);border-bottom:0}
+.filterFlow .subCategoryTabs button{padding:8px 13px;background:#fff}
+.secondaryFilters{display:flex;gap:12px;margin-top:12px;padding-top:14px;border-top:1px solid var(--line)}
+.secondaryFilters label{min-width:190px}.secondaryFilters label span{display:block;margin-bottom:6px;color:#667085;font-size:11px;font-weight:700}
+.secondaryFilters select{width:100%;height:42px;border:1px solid #cfd4dc;background:#fff;padding:0 11px;font:inherit;font-size:12px}
+
+.catalogGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.catalogGrid .card{overflow:hidden;border-radius:16px;background:#fff;box-shadow:0 8px 25px #061d490b}
+.catalogGrid .productImage{aspect-ratio:1/1.05}
+.catalogGrid .productImage img{padding:10px}
+.catalogGrid .cardBody{padding:16px}
+.catalogGrid .card h3{min-height:auto;margin:5px 0 9px;font-size:15px;line-height:1.35}
+.purchasePrices{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.purchasePrices .purchasePrice:only-child{grid-column:1/-1}
+.purchasePrice{min-height:82px;padding:9px}
+.purchasePrice strong{font-size:17px}.pairPurchasePrice strong{font-size:20px}
+.transfer{margin:0 0 9px;color:#667085;font-size:10px}
+.orderComposer{display:grid;gap:8px;margin-top:auto;padding-top:4px}
+.amountFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.amountField:only-child{grid-column:1/-1}
+.amountField>span{display:block;margin-bottom:4px;color:#475467;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.orderComposer .cardQty{display:grid;grid-template-columns:29px minmax(30px,1fr) 29px;height:38px;border:1px solid #cfd4dc;border-radius:8px;overflow:hidden}
+.orderComposer .cardQty button{border:0;background:#f3f5f8;color:var(--blue);font-size:17px;font-weight:800;cursor:pointer}
+.orderComposer .cardQty input{min-width:0;width:100%;border:0;text-align:center;font:800 13px 'DM Sans',sans-serif;appearance:textfield}
+.orderComposer .cardQty input::-webkit-inner-spin-button,.orderComposer .cardQty input::-webkit-outer-spin-button{appearance:none;margin:0}
+.addQuantities{width:100%;margin:0;padding:11px 8px;border:0;border-radius:9px;background:var(--blue);color:#fff;font:800 12px 'DM Sans',sans-serif;cursor:pointer}
+.addQuantities:hover{background:var(--red)}
+.amountHint{display:block;min-height:14px;color:#667085;font-size:9px;line-height:1.35;text-align:center}
+.amountHint.error{color:var(--red);font-weight:800}.amountHint.success{color:#16834a;font-weight:800}
+
+.homeComboGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.homeComboCard{display:grid;grid-template-columns:46% 54%;min-height:340px}
+.homeComboImage{height:100%;aspect-ratio:auto;border-right:1px solid var(--line)}
+.homeComboImage img{padding:10px}
+.homeComboBody{display:flex;align-items:stretch;flex-direction:column;gap:9px;padding:20px}
+.homeComboBody small,.homeComboBody h3{grid-column:auto}
+.homeComboBody h3{font-size:19px}
+.homeComboBody ul{margin:0;padding-left:18px;color:#667085;font-size:11px;line-height:1.45}
+.homeComboBody li+li{margin-top:3px}.homeComboBody .moreItems{color:var(--blue);font-weight:800}
+.homeComboPrice{margin-top:auto;font-size:26px}
+.homeComboBody .compactComposer{margin-top:3px}
+.compactComposer .amountFields{grid-template-columns:1fr}
+.compactComposer .amountHint{display:none}
+.comboDetails{border-radius:8px;background:#faf9f7;padding:8px 10px}
+
+@media(max-width:1100px){.catalogGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.homeComboCard{grid-template-columns:42% 58%}}
+@media(max-width:800px){
+  .filterFlow{margin-right:-1px;padding:13px}.brandFilterChips{margin-right:-13px;padding-right:13px}.filterFlow .subCategoryTabs{margin-right:-13px}
+  .secondaryFilters{display:grid;grid-template-columns:1fr 1fr}.secondaryFilters label{min-width:0}
+  .catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.catalogGrid .cardBody{padding:11px}.catalogGrid .card h3{font-size:13px}
+  .purchasePrices{grid-template-columns:1fr}.purchasePrices .purchasePrice:only-child{grid-column:auto}.purchasePrice{min-height:0}.pairPurchasePrice strong{font-size:18px}
+  .amountFields{grid-template-columns:1fr}.amountField:only-child{grid-column:auto}.orderComposer .cardQty{grid-template-columns:27px minmax(30px,1fr) 27px}
+  .homeComboCard{display:flex;min-height:0;flex-direction:column}.homeComboImage{height:auto;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}.homeComboBody{padding:16px}.homeComboBody ul{font-size:10px}.homeComboPrice{font-size:23px}
+  .homeHighlightGrid .purchasePrices{grid-template-columns:1fr}.homeHighlightGrid .amountFields{grid-template-columns:1fr}
+}
