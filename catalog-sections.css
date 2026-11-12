@@ -211,3 +211,40 @@ body.cartOpen{overflow:hidden}
   .homeComboCard{display:flex;min-height:0;flex-direction:column}.homeComboImage{height:auto;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}.comboImageHint{opacity:1;transform:none}.homeComboBody{padding:16px}.homeComboBody ul{font-size:10px}.homeComboPrice{font-size:23px}
   .homeHighlightGrid .purchasePrices{grid-template-columns:1fr}.homeHighlightGrid .amountFields{grid-template-columns:1fr}
 }
+
+
+/* Beneficios principales visibles apenas termina el banner. */
+.servicePromises{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line);background:#fff}
+.servicePromises div{padding:18px 22px;text-align:center;border-right:1px solid var(--line)}
+.servicePromises div:last-child{border-right:0}
+.servicePromises b,.servicePromises span{display:block}
+.servicePromises b{color:var(--blue);font-size:14px}
+.servicePromises span{margin-top:4px;color:#667085;font-size:11px}
+
+/* Precio 2x arriba y precio por caja debajo, separados por una línea horizontal. */
+.purchasePrices{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.purchasePrices .purchasePrice,.purchasePrices .purchasePrice:only-child{min-height:0;border:0;border-radius:0;padding:11px 12px}
+.purchasePrices .purchasePrice+.purchasePrice{border-top:1px solid var(--line)}
+.purchasePrices .pairPurchasePrice{background:#fff8f7}
+.purchasePrices .boxPurchasePrice{background:#f5f8fc}
+.purchasePrices .purchasePrice strong{font-size:19px}
+.purchasePrices .pairPurchasePrice strong{font-size:22px}
+
+/* Cierre unificado: tipo de cliente y alta de ofertas en una sola sección. */
+.customerHub{padding:68px max(8vw,28px);background:var(--cream)}
+.customerHubIntro{text-align:center}
+.customerHubIntro h2{margin:6px 0 8px;color:var(--blue);font:600 clamp(30px,3.5vw,48px)/1.08 'Playfair Display',serif}
+.customerHubIntro>p:not(.eyebrow){max-width:680px;margin:0 auto 24px;color:#667085;line-height:1.55}
+.customerHub .offersSignup{margin-top:34px;padding:32px;border-radius:18px;background:var(--blue);color:#fff}
+.customerHub .offersSignup h2,.customerHub .offersSignupCopy>p:last-child{color:#fff}
+.customerHub .offersSignupCopy>p:last-child{opacity:.8}
+
+@media(max-width:800px){
+  .servicePromises{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .servicePromises div{padding:15px 10px;border-bottom:1px solid var(--line)}
+  .servicePromises div:nth-child(2){border-right:0}
+  .servicePromises div:nth-last-child(-n+2){border-bottom:0}
+  .purchasePrices{display:flex;grid-template-columns:none}
+  .customerHub{padding:48px 16px}
+  .customerHub .offersSignup{margin-top:24px;padding:22px 16px}
+}
