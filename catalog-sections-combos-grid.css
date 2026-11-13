@@ -325,3 +325,58 @@ body.cartOpen{overflow:hidden}
 .brandTile small{font-weight:700}
 @media(max-width:1100px){.brandShowcase{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:800px){.brandShowcase{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;padding:0;overflow:visible}.brandTile{min-height:150px;padding:11px 9px}.brandLogoWrap{height:66px!important}}
+
+/* Tarjetas simples y ficha rápida de producto. */
+.productImage.productQuickView{position:relative;width:100%;padding:0;border:0;background:#fff;cursor:pointer;overflow:hidden}
+.productQuickView>span{position:absolute;right:12px;bottom:10px;padding:7px 10px;border-radius:999px;background:#061d49e8;color:#fff;font:800 10px 'DM Sans',sans-serif;opacity:0;transform:translateY(4px);transition:.2s}
+.card:hover .productQuickView>span,.productQuickView:focus-visible>span{opacity:1;transform:none}
+.productTitleButton{display:block;width:100%;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer}
+.productTitleButton h3{transition:color .2s}.productTitleButton:hover h3{color:var(--red)}
+.catalogGrid .card{display:flex;flex-direction:column}
+.catalogGrid .cardBody{display:flex;flex:1;flex-direction:column}
+.catalogGrid .purchasePrices{margin:3px 0 10px}
+.catalogGrid .purchasePrice span{color:#667085;font-size:10px}
+.catalogGrid .orderComposer{margin-top:auto}
+.amountHint:empty{display:none}.amountHint:not(:empty){display:block}
+
+.productModal{position:fixed;inset:0;z-index:1200;display:none;place-items:center;padding:24px}
+.productModal.open{display:grid}
+.productModalBackdrop{position:absolute;inset:0;width:100%;height:100%;border:0;background:#061d49b8;backdrop-filter:blur(4px);cursor:pointer}
+.productModalDialog{position:relative;z-index:1;width:min(940px,100%);max-height:min(88vh,760px);overflow:auto;border-radius:22px;background:#fff;box-shadow:0 30px 90px #0006}
+.productModalClose{position:absolute;z-index:2;top:14px;right:14px;display:grid;width:42px;height:42px;place-items:center;border:0;border-radius:50%;background:#fff;color:var(--blue);font-size:29px;line-height:1;box-shadow:0 7px 24px #061d4924;cursor:pointer}
+.productDetailGrid{display:grid;grid-template-columns:minmax(320px,46%) 1fr;min-height:520px}
+.productDetailImage{display:grid;place-items:center;min-height:520px;padding:30px;background:#f8f6f2}
+.productDetailImage img{width:100%;height:100%;max-height:480px;object-fit:contain}
+.productDetailBody{display:flex;flex-direction:column;padding:52px 38px 34px}
+.productDetailBody h2{margin:6px 0 10px;color:var(--blue);font:600 clamp(26px,3vw,39px)/1.1 'Playfair Display',serif}
+.productDetailDescription{margin:0 0 18px;color:#667085;font-size:13px;line-height:1.55}
+.productDetailPrices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 18px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.productDetailPrices>div,.productDetailMainPrice{padding:16px;background:#fff8f7}
+.productDetailPrices>div+div{border-left:1px solid var(--line);background:#f5f8fc}
+.productDetailPrices small,.productDetailPrices strong,.productDetailPrices span,.productDetailPrices b,.productDetailMainPrice small,.productDetailMainPrice strong{display:block}
+.productDetailPrices small,.productDetailMainPrice small{color:#667085;font-size:11px;font-weight:800}
+.productDetailPrices strong,.productDetailMainPrice strong{margin:4px 0;color:var(--blue);font-size:24px}
+.productDetailPrices span{color:#667085;font-size:11px}.productDetailPrices b{margin-top:5px;color:#16834a;font-size:11px}
+.productDetailMainPrice{margin:8px 0 18px;border:1px solid #ffd3cd;border-radius:14px}
+.productDetailIncludes{margin:0 0 18px;padding:15px;border-radius:12px;background:#f7f8fa;color:#475467;font-size:12px}
+.productDetailIncludes ul{margin:8px 0 0;padding-left:20px;line-height:1.55}
+.productDetailBody .orderComposer{margin-top:auto}.productModalOpen{overflow:hidden}
+
+/* Los reels pesados de Instagram cargan recién cuando la persona los toca. */
+.reelCard{display:grid;place-items:stretch;overflow:hidden}
+.reelPreview{position:relative;display:flex;min-height:470px;align-items:center;justify-content:center;flex-direction:column;gap:10px;width:100%;border:0;border-radius:14px;background:radial-gradient(circle at 50% 28%,#ed1c24 0 10%,transparent 11%),linear-gradient(145deg,#061d49 0 58%,#102f65 58% 72%,#ed1c24 72%);color:#fff;cursor:pointer;overflow:hidden}
+.reelPreview::before{content:'COMBOS FALUCHO';position:absolute;top:28px;left:0;right:0;font-size:11px;font-weight:800;letter-spacing:.18em}
+.reelPreview::after{content:'Instagram';position:absolute;right:22px;bottom:20px;font-size:11px;font-weight:700;opacity:.75}
+.reelPlay{display:grid;width:70px;height:70px;place-items:center;padding-left:5px;border:2px solid #fff;border-radius:50%;background:#ffffff20;font-size:27px;box-shadow:0 12px 30px #0004;transition:.2s}
+.reelPreview:hover .reelPlay{transform:scale(1.08);background:var(--red)}
+.reelPreview b{font-size:19px}.reelPreview small{opacity:.8}
+.reelCard.loading{background:#fff}.reelCard.loading .instagram-media{min-height:470px}
+
+@media(max-width:800px){
+  .productQuickView>span{opacity:1;transform:none}
+  .productModal{padding:10px}.productModalDialog{max-height:94vh;border-radius:16px}.productModalClose{top:9px;right:9px}
+  .productDetailGrid{display:block;min-height:0}.productDetailImage{min-height:270px;height:38vh;padding:22px}.productDetailImage img{max-height:100%}
+  .productDetailBody{padding:24px 17px 20px}.productDetailBody h2{padding-right:38px;font-size:27px}
+  .productDetailPrices{grid-template-columns:1fr}.productDetailPrices>div+div{border-top:1px solid var(--line);border-left:0}
+  .reelPreview{min-height:430px}
+}
