@@ -136,8 +136,6 @@ checkout.onclick=async()=>{
   const name=document.querySelector("#buyerName").value.trim(),phone=document.querySelector("#buyerPhone").value.trim(),location=document.querySelector("#buyerLocation").value.trim(),type=document.querySelector("#buyerType").value,delivery=document.querySelector("#deliveryType").value,notes=document.querySelector("#buyerNotes").value.trim(),error=document.querySelector("#checkoutError"),validPhone=phone.replace(/\D/g,"").length>=8;
   if(!name||!validPhone||!location){error.textContent="Completá tu nombre, un WhatsApp válido y tu localidad para enviar el pedido.";error.hidden=false;(!name?document.querySelector("#buyerName"):!validPhone?document.querySelector("#buyerPhone"):document.querySelector("#buyerLocation")).focus();return}
   error.hidden=true;
-  const whatsappTab=window.open("about:blank","falucho-whatsapp");
-  if(whatsappTab){whatsappTab.document.title="Preparando WhatsApp";whatsappTab.document.body.innerHTML='<p style="font-family:system-ui;padding:24px">Estamos guardando tu pedido y preparando WhatsApp…</p>'}
   const lines=entries.map(({quantity,product,format,price})=>"• "+quantity+" x "+product.name+" ("+productFormat(product,format)+") — "+money(price*quantity)),total=entries.reduce((sum,item)=>sum+item.price*item.quantity,0),customer="Nombre: "+name+"\nWhatsApp: "+phone+"\nLocalidad: "+location+"\nTipo de cliente: "+type+"\nEntrega: "+delivery+(notes?"\nObservaciones: "+notes:""),clientOrderId=localStorage.getItem("falucho-pending-order-id")||("web-"+Date.now()+"-"+Math.random().toString(36).slice(2,12)),intakeNotes=[notes,"WhatsApp: "+phone].filter(Boolean).join(" · ");
   trackMeta('InitiateCheckout',{content_ids:entries.map(entry=>String(entry.product.id)),content_type:'product',value:total,currency:'ARS',num_items:entries.reduce((sum,entry)=>sum+entry.quantity,0)});
   localStorage.setItem("falucho-pending-order-id",clientOrderId);
@@ -155,9 +153,8 @@ checkout.onclick=async()=>{
     trackMeta('Contact',{content_ids:entries.map(entry=>String(entry.product.id)),value:total,currency:'ARS'});
     const whatsappUrl="https://wa.me/541164591826?text="+encodeURIComponent(message);
     localStorage.setItem("falucho-last-whatsapp-url",whatsappUrl);
-    if(whatsappTab&&!whatsappTab.closed)whatsappTab.location.replace(whatsappUrl);else window.location.replace(whatsappUrl);
+    window.location.assign(whatsappUrl);
   }catch(failure){
-    if(whatsappTab&&!whatsappTab.closed)whatsappTab.close();
     error.textContent="No pudimos guardar el pedido. Probá nuevamente; el carrito quedó guardado.";
     error.hidden=false;
     console.error(failure);
