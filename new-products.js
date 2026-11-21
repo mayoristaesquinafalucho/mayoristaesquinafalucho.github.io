@@ -58,3 +58,24 @@ Object.entries(chandonCatalogPrices).forEach(([slug, price]) => {
   const product = window.PRODUCTS.find(item => item.slug === slug);
   if (product) product.price = price;
 });
+
+window.PRODUCTS.push({
+  id: 5120,
+  slug: "rollo-de-cocina-elegante-premium-x3-120-panos",
+  name: "Rollo de cocina Elegante Premium x3 de 120 paños",
+  price: 2860,
+  regularPrice: null,
+  cat: "Limpieza",
+  categories: [
+    "Limpieza"
+  ],
+  brand: "Elegante",
+  sku: "",
+  description: "Paquete de 3 rollos de doble hoja, con 120 paños por rollo. El bulto mayorista contiene 4 paquetes.",
+  img: "assets/rollo-de-cocina-elegante-premium-x3-120-panos.webp",
+  featuredOffer: false,
+  boxQuantity: 4,
+  boxUnitPrice: 2350,
+  boxPrice: 9400,
+  boxLabel: "BULTO X4"
+});
