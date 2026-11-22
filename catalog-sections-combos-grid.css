@@ -380,3 +380,72 @@ body.cartOpen{overflow:hidden}
   .productDetailPrices{grid-template-columns:1fr}.productDetailPrices>div+div{border-top:1px solid var(--line);border-left:0}
   .reelPreview{min-height:430px}
 }
+
+/* Catalog ordering and mobile cart */
+.catalogTools {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.catalogTools .searchField { flex: 1 1 260px; min-width: 0; }
+#repeatOrderShortcut { white-space: nowrap; }
+.amountFields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.amountField { min-width: 0; }
+.amountField > span { font-size: .75rem; }
+.orderComposer .cardQty { grid-template-columns: 34px minmax(25px, 1fr) 34px; height: 44px; }
+.orderComposer .cardQty input { font-size: 1rem; }
+.orderComposer .quickAdd {
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px;
+  background: var(--blue);
+  color: #fff;
+  font: 700 .875rem 'DM Sans', sans-serif;
+}
+.orderComposer .quickAdd:hover { background: var(--blue2); }
+.orderComposer [hidden], .floatingCart[hidden], .orderActions [hidden] { display: none; }
+.businessPath .businessLinks { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.businessLinks button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-height: 40px;
+  background: #fff;
+  color: var(--blue);
+  font: 700 .875rem 'DM Sans', sans-serif;
+  cursor: pointer;
+}
+.businessPath a, #whatsappResume { color: var(--blue); text-decoration: underline; }
+.orderActions { display: grid; justify-items: start; gap: 8px; margin-bottom: 12px; }
+.orderActions:has([hidden] + [hidden] + p:empty) { display: none; }
+.orderActions p { margin: 0; font-size: .9rem; }
+.orderActions p:empty { display: none; }
+.checkoutHelp { margin: 10px 0 0; font-size: .875rem; color: #475467; }
+#checkout:disabled { opacity: .65; cursor: default; }
+
+@media (max-width: 700px) {
+  .amountFields { grid-template-columns: 1fr; }
+  body {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .catalogPage { overflow-y: auto; min-height: 0; }
+  .cartOpen .catalogPage, .productModalOpen .catalogPage { overflow-y: hidden; }
+  .hasOrder .floatingWhatsapp { display: none; }
+  .floatingCart {
+    position: relative;
+    inset: auto;
+    margin: 6px 12px calc(8px + env(safe-area-inset-bottom));
+    min-height: 48px;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 16px;
+  }
+  .floatingCart b, .floatingCart em { font-size: .875rem; }
+  .floatingCart em { border: 0; padding-left: 0; }
+}
