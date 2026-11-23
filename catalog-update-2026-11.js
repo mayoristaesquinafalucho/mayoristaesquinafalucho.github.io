@@ -1613,12 +1613,14 @@
   }
 ];
   const byId = new Map(changes.map(change => [String(change.id), change]));
-  const keepDrinkBox = product => /skyy|fernet branca|speed xl/i.test(String(product.name || ''));
+  const isChandon750 = product => /^champagne-chandon-(aperitif|delice|extra-brut)-x750ml$/.test(product.slug || '');
+  const keepDrinkBox = product => isChandon750(product) || /skyy|fernet branca|speed xl/i.test(String(product.name || ''));
   const preserveDrinkException = product => {
     const name = String(product.name || '');
     if (/skyy/i.test(name)) return { ...product, price: 9900, boxQuantity: 12, boxUnitPrice: 8900, boxPrice: 106800 };
     if (/fernet branca/i.test(name)) return { ...product, price: 17000, boxQuantity: 12, boxUnitPrice: 16000, boxPrice: 192000 };
     if (/speed xl/i.test(name)) return { ...product, price: 3000, boxQuantity: 12, boxUnitPrice: 2000, boxPrice: 24000 };
+    if (isChandon750(product)) return { ...product, price: 16500, boxQuantity: 6, boxUnitPrice: 15500, boxPrice: 93000 };
     return product;
   };
   window.PRODUCTS = (window.PRODUCTS || [])
