@@ -22,7 +22,14 @@
   .chooserOpt i{margin-left:auto;font-style:normal;font-size:26px;color:#fff}
   .chooserAll{margin-top:18px;background:none;border:0;color:#fff;text-decoration:underline;font:inherit;cursor:pointer;padding:8px}
   body.chooserOpen{overflow:hidden}
-  .catalogTabs{scroll-margin-top:90px}`;
+  .catalogTabs{scroll-margin-top:90px}
+  .catalogFirst .catalogHeading,.catalogFirst .catalogBenefits{display:none}
+  .filterToggle{display:flex;align-items:center;justify-content:space-between;width:100%;margin:0 0 14px;padding:12px 16px;border:1px solid var(--blue,#061d49);border-radius:12px;background:#fff;color:var(--blue,#061d49);font:inherit;font-weight:700;cursor:pointer}
+  .filterToggle em{font-style:normal;transition:transform .2s}
+  .filterToggle[aria-expanded=true] em{transform:rotate(180deg)}
+  .filterFlow.collapsed{display:none}
+  .subCategoryTabs>span{font-size:0}.subCategoryTabs>span::after{content:'Tipo';font-size:14px}
+  .subCategoryTabs button.active{background:var(--blue,#061d49)!important;color:#fff!important;border-color:var(--blue,#061d49)!important}`;
   const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
   const logo = document.querySelector('header .brand img');
@@ -38,6 +45,18 @@
   document.body.prepend(box);
   document.body.classList.add('chooserOpen');
 
+
+  // Filtros de marca y tipo plegados en un botón, para que se vean los productos de una.
+  const flow = document.querySelector('.filterFlow');
+  if (flow) {
+    const t = document.getElementById('brandFilterTitle'); if (t) t.textContent = 'Marca';
+    flow.classList.add('collapsed'); flow.id = flow.id || 'filterFlow';
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'filterToggle'; btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', flow.id);
+    btn.innerHTML = '<span>Filtrar por marca o tipo</span><em aria-hidden="true">▾</em>';
+    btn.onclick = () => { const open = flow.classList.toggle('collapsed') === false; btn.setAttribute('aria-expanded', String(open)); };
+    flow.before(btn);
+  }
   const close = () => { box.hidden = true; document.body.classList.remove('chooserOpen'); };
   const openView = view => {
     close();
@@ -59,7 +78,7 @@
     const b = e.target.closest('[data-choose]'); if (!b) return;
     const v = b.dataset.choose;
     close();
-    whenReady(() => openView(v === 'todo' ? null : v));
+    whenReady(() => openView(v === 'todo' ? 'Todos' : v));
   });
 
   const param = (new URLSearchParams(location.search).get('ver') || '').toLowerCase();
