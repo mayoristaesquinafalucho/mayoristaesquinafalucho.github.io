@@ -77,6 +77,7 @@
   box.addEventListener('click', e => {
     const b = e.target.closest('[data-choose]'); if (!b) return;
     const v = b.dataset.choose;
+    document.body.dataset.chose = '1'; document.body.classList.add('simpleMode');
     close();
     whenReady(() => openView(v === 'todo' ? 'Todos' : v));
   });
@@ -85,6 +86,8 @@
   const direct = OPTIONS.find(o => o.view.toLowerCase() === param);
   if (direct || param === 'todo' || location.hash === '#catalogo') {
     close();
+    if (param) { document.body.dataset.chose = '1'; document.body.classList.add('simpleMode'); }
     if (direct) whenReady(() => openView(direct.view));
+    else if (param === 'todo') whenReady(() => openView('Todos'));
   }
 })();
