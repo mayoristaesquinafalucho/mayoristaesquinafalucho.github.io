@@ -3,6 +3,9 @@
 (() => {
   const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vToC-r3Lqc13RFxeMYNEcmiExgNXzlzSp0PfbhgnjFuKScG7sxdV-r0fEjRV4l04Yhpy_uzD4bjV3K8/pub?output=csv';
   const APP = 'app-20261113d.js?v=8';
+  // Pestaña "Combos" de la misma planilla (si no existe o falla, quedan los combos de siempre).
+  const COMBOS_GID = '';
+  const COMBOS_CSV = COMBOS_GID ? SHEET_CSV.replace('pub?output=csv', 'pub?gid=' + COMBOS_GID + '&single=true&output=csv') : '';
 
   const parseCSV = text => {
     const rows = []; let row = [], cell = '', q = false;
@@ -59,13 +62,42 @@
     window.PRODUCTS = products.filter(p => !hidden.has(p) && (p.price || p.boxPrice));
   };
 
-  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=4'; document.body.appendChild(t); }; document.body.appendChild(s); };
+  // Link de Google Drive -> imagen que se puede mostrar en la página.
+  const imgUrl = v => {
+    v = String(v || '').trim();
+    const m = v.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]{20,})/);
+    return m ? 'https://lh3.googleusercontent.com/d/' + m[1] : v;
+  };
+  const slug = t => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  const applyCombos = rows => {
+    if (!rows || rows.length < 2) return;
+    const head = rows[0].map(h => h.trim().toLowerCase());
+    const at = re => head.findIndex(h => re.test(h));
+    const ci = { activo: at(/^activo/), nombre: at(/^nombre/), precio: at(/^precio/), incluye: at(/^incluye/), foto: at(/^foto/), ig: at(/^instagram/) };
+    if (ci.nombre < 0 || ci.precio < 0) return;
+    const combos = [];
+    rows.slice(1).forEach((r, i) => {
+      const g = k => (ci[k] >= 0 ? (r[ci[k]] || '').trim() : '');
+      const name = g('nombre'), price = num(g('precio'));
+      if (!name || !price || no(g('activo'))) return;
+      combos.push({ id: 'cmb-' + slug(name), slug: 'combo-' + slug(name), name, price, regularPrice: null, cat: 'Combos', categories: ['Combos'], brand: 'Falucho', sku: 'COMBO', description: '', img: imgUrl(g('foto')) || 'assets/banner-combos.png', packLabel: 'COMBO', comboItems: g('incluye').split(/\s*[;\n]\s*/).filter(Boolean), instagram: g('ig'), fromSheet: true, order: i });
+    });
+    if (!combos.length) return;
+    window.PRODUCTS = (window.PRODUCTS || []).filter(p => p.cat !== 'Combos').concat(combos);
+    window.__sheetCombos = true;
+  };
+
+  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=5'; document.body.appendChild(t); }; document.body.appendChild(s); };
   let done = false;
   const go = () => { if (!done) { done = true; start(); } };
   setTimeout(go, 6000); // si la planilla tarda, muestra los precios guardados
-  fetch(SHEET_CSV, { cache: 'no-store' })
-    .then(r => (r.ok ? r.text() : Promise.reject(r.status)))
-    .then(t => { if (!done) apply(parseCSV(t)); })
-    .catch(e => console.warn('No se pudo leer la planilla de precios', e))
+  const get = url => fetch(url, { cache: 'no-store' }).then(r => (r.ok ? r.text() : Promise.reject(r.status))).then(parseCSV);
+  Promise.allSettled([get(SHEET_CSV), COMBOS_CSV ? get(COMBOS_CSV) : Promise.resolve(null)])
+    .then(([p, c]) => {
+      if (done) return;
+      if (p.status === 'fulfilled') apply(p.value); else console.warn('No se pudo leer la planilla de precios', p.reason);
+      if (c.status === 'fulfilled') applyCombos(c.value); else console.warn('No se pudo leer la pestaña Combos', c.reason);
+    })
     .finally(go);
 })();

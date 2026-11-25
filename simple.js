@@ -28,14 +28,31 @@
       <div class="miniPrice">${many || l.box ? `<small class="miniLabel">${esc(l.label)}</small>` : ''}${l.old ? `<s>${fmt(l.old)}</s>` : ''}<strong>${fmt(l.price)}</strong>${l.each ? `<small class="miniEach">${fmt(l.each)} c/u</small>` : ''}</div>
       <span class="miniCtl">${qtyHtml(l.k, p.name + ' ' + l.label)}</span></div>`;
 
+  // Si los combos vienen de la planilla, saca los que estaban escritos en el código.
+  if (window.__sheetCombos && Array.isArray(products)) {
+    for (let i = products.length - 1; i >= 0; i--) if (products[i].cat === 'Combos' && !products[i].fromSheet) products.splice(i, 1);
+    try { renderHomeCombos(); } catch (e) {}
+  }
+
   const originalCard = card;
   const miniCard = p => {
-    if (p.cat === 'Combos') return originalCard(p);
+    if (p.cat === 'Combos') return comboCard(p);
     const ls = lines(p);
     return `<article class="card mini" data-mini="${esc(p.id)}">
       <button class="miniImg" type="button" data-product-detail="${esc(p.id)}" aria-label="Ver ${esc(p.name)}"><img loading="lazy" src="${esc(p.img)}" alt="">${p.featuredOffer ? '<em>Oferta</em>' : ''}</button>
       <button class="miniName" type="button" data-product-detail="${esc(p.id)}">${esc(p.name)}</button>
       <div class="miniFoot">${ls.map(l => lineHtml(p, l, ls.length > 1)).join('')}</div>
+    </article>`;
+  };
+  const comboCard = p => {
+    const items = p.comboItems || [];
+    const k = `${p.id}:unit`;
+    return `<article class="card mini comboMini" data-mini="${esc(p.id)}">
+      <button class="miniImg" type="button" data-product-detail="${esc(p.id)}" aria-label="Ver ${esc(p.name)}"><img loading="lazy" src="${esc(p.img)}" alt=""><em>Combo</em></button>
+      <button class="miniName" type="button" data-product-detail="${esc(p.id)}">${esc(p.name)}</button>
+      ${items.length ? `<details class="miniItems"><summary>Qué trae (${items.length})</summary><ul>${items.map(t => `<li>${esc(t)}</li>`).join('')}</ul></details>` : ''}
+      ${p.instagram ? `<a class="miniIg" href="${esc(p.instagram)}" target="_blank" rel="noopener">Ver en Instagram</a>` : ''}
+      <div class="miniFoot"><div class="miniLine" data-line="${k}"><div class="miniPrice"><strong>${fmt(p.price)}</strong></div><span class="miniCtl">${qtyHtml(k, p.name)}</span></div></div>
     </article>`;
   };
   card = miniCard;
@@ -158,6 +175,11 @@
   .miniQty button{width:30px;height:34px;border:0;background:none;color:#fff;font-size:18px;cursor:pointer}
   .miniQty span{min-width:14px;text-align:center;font-weight:700;font-size:14px}
   .miniMore{border:1px dashed #c9d2e3;border-radius:16px;background:#f7f9fc;color:var(--blue);font:600 14px 'DM Sans',sans-serif;cursor:pointer}
+  .miniItems{margin:0 10px 6px;font-size:12px;color:#4b5563}
+  .miniItems summary{cursor:pointer;color:var(--blue);font-weight:600}
+  .miniItems ul{margin:6px 0 0;padding-left:16px}
+  .miniIg{display:inline-block;margin:0 10px 6px;font-size:12px;font-weight:600;color:var(--blue)}
+  #catalogo .catalogGrid:not(.rows) .comboMini{grid-column:span 1}
   @media(min-width:900px){.miniRail{grid-auto-columns:190px}}`;
   document.head.appendChild(css);
 
