@@ -54,6 +54,17 @@
     };
   }
 
+  // Lácteos y quesos en filas separadas.
+  if (typeof foodGroup === 'function') {
+    const originalFood = foodGroup;
+    const plainF = p => String((p.name || '') + ' ' + (p.brand || '')).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    foodGroup = function (p) {
+      const g = originalFood(p);
+      if (g !== 'Lácteos y quesos') return g;
+      return /queso|tybo|mozzarella|muzzarella|cremoso|reggianito|sardo|provolone|vacremita|gandacrem|port salut|fontina|rallado/.test(plainF(p)) ? 'Quesos' : 'Lácteos';
+    };
+  }
+
   const unfiltered = () => !query && activeSubcategory === 'all' && activeDetail === 'all' && activeBrand === 'all' && !buyerMode && !businessSelection;
   const ROW_MAX = 12;
 
