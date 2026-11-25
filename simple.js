@@ -67,6 +67,14 @@
 
   const unfiltered = () => !query && activeSubcategory === 'all' && activeDetail === 'all' && activeBrand === 'all' && !buyerMode && !businessSelection;
   const ROW_MAX = 12;
+  // "Más vendidos": los marcados con SI en la columna mas_vendido de la planilla.
+  // Si en esa categoría no hay ninguno marcado, usa los destacados que ya tenía la página.
+  const FALLBACK_TOP = ['fideos-mostachol-sol-pampeano-x500gr','vodka-skyy-cosmic-x700ml','speed-xl-x-unidad','azucar-gury-x1kg','aceite-girasol-el-paisano-x900cc','leche-larga-vida-gandara-x1lt','alfajor-super-triple-fantoche-x100gr','cajon-dulce-de-membrillo-7-dias-x5kg','queso-cremoso-4-hermanos-x-horma','aperitivo-fernet-branca-x750ml','aperitivo-fernet-branca-x750ml'];
+  const topSellers = list => {
+    const marked = list.filter(p => p.bestSeller);
+    if (marked.length) return marked;
+    return FALLBACK_TOP.map(slug => list.find(p => p.slug === slug)).filter((p, i, a) => p && a.indexOf(p) === i);
+  };
 
   const originalRender = renderCatalog;
   renderCatalog = function () {
@@ -80,7 +88,9 @@
       for (const p of list) { const g = subcategoryGroup(p) || 'Otros'; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(p); }
       if (groups.size > 1) {
         grid.classList.add('rows');
-        grid.innerHTML = [...groups].map(([g, items]) => `<section class="miniRow">
+        const top = topSellers(list).filter(p => p.cat !== 'Combos');
+        const topHtml = top.length >= 2 ? `<section class="miniRow topRow"><div class="miniRowHead"><h2>⭐ Más vendidos</h2></div><div class="miniRail">${top.slice(0, ROW_MAX).map(miniCard).join('')}</div></section>` : '';
+        grid.innerHTML = topHtml + [...groups].map(([g, items]) => `<section class="miniRow">
           <div class="miniRowHead"><h2>${esc(g)}</h2><button type="button" data-subcategory="${esc(g)}">Ver todos (${items.length})</button></div>
           <div class="miniRail">${items.slice(0, ROW_MAX).map(miniCard).join('')}${items.length > ROW_MAX ? `<button class="miniMore" type="button" data-subcategory="${esc(g)}">Ver los ${items.length}<br>→</button>` : ''}</div>
         </section>`).join('');
@@ -115,6 +125,8 @@
   css.textContent = `
   body.simpleMode .heroBanner,body.simpleMode .servicePromises,body.simpleMode #como-comprar,body.simpleMode #combos,body.simpleMode #destacados,body.simpleMode #combos-en-video,body.simpleMode #marcas,body.simpleMode #informacion,body.simpleMode #mayoristas,body.simpleMode .catalogFootnote{display:none!important}
   body.simpleMode #catalogo{padding-top:16px}
+  body.simpleMode #catalogo .catalogTools{position:sticky;top:var(--hdr,74px);z-index:15;margin:0 -2px 10px;padding:10px 2px;background:#fff;border:0;box-shadow:none;grid-template-columns:1fr}
+  body.simpleMode #catalogo .catalogTools #repeatOrderShortcut{display:none}
   #catalogo .catalogGrid.rows{display:block}
   #catalogo .catalogGrid.rows ~ .loadMore,#catalogo .loadMore[hidden]{display:none!important}
   .miniRow{margin:0 0 26px}
@@ -148,6 +160,10 @@
   .miniMore{border:1px dashed #c9d2e3;border-radius:16px;background:#f7f9fc;color:var(--blue);font:600 14px 'DM Sans',sans-serif;cursor:pointer}
   @media(min-width:900px){.miniRail{grid-auto-columns:190px}}`;
   document.head.appendChild(css);
+
+  const setHdr = () => { const h = document.querySelector('header'); if (h) document.documentElement.style.setProperty('--hdr', h.offsetHeight + 'px'); };
+  setHdr(); window.addEventListener('resize', setHdr);
+  const sInput = document.getElementById('search'); if (sInput) sInput.placeholder = 'Buscar: fernet, aceite, yerba…';
 
   renderCatalog();
 })();
