@@ -113,6 +113,14 @@
       return 'Especiales de fiestas';
     };
   }
+  // Columna "seccion" de la planilla: si está completa, manda sobre la sección automática.
+  {
+    const autoSub = subcategoryGroup;
+    subcategoryGroup = function (p) {
+      if (p.seccion && activeView !== 'Todos' && activeView !== 'Ofertas' && !(activeView === 'Fiestas' && p.cat !== 'Fiestas' && !p.fiestas)) return p.seccion;
+      return autoSub(p);
+    };
+  }
   const tabs = document.querySelector('.catalogTabs');
   if (hayFiestas && tabs && !tabs.querySelector('[data-view="Fiestas"]')) {
     const b = document.createElement('button'); b.type = 'button'; b.dataset.view = 'Fiestas'; b.textContent = '🎄 Fiestas';
