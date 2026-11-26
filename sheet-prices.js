@@ -43,7 +43,7 @@
       if (!id && !name) continue;
       let p = byId.get(id);
       if (!p) { // producto nuevo cargado en la planilla
-        p = { id: id || 'n' + products.length, slug: (name || id).toLowerCase().replace(/[^a-z0-9]+/g, '-'), name, price: null, regularPrice: null, cat: get('categoria') || 'Alimentos', categories: [], brand: get('marca'), sku: '', img: imgUrl(get('imagen')), featuredOffer: false };
+        p = { id: id || 'n' + products.length, slug: (name || id).toLowerCase().replace(/[^a-z0-9]+/g, '-'), name, price: null, regularPrice: null, cat: get('categoria') || 'Alimentos', categories: [get('categoria') || 'Alimentos'], brand: get('marca'), sku: '', img: imgUrl(get('imagen')), featuredOffer: false };
         products.push(p); byId.set(String(p.id), p);
       }
       if (name) p.name = name;
