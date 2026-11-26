@@ -82,6 +82,45 @@
     };
   }
 
+  // ---- Fiestas: productos tildados en la columna "fiestas" o con categoría Fiestas ----
+  const esFiesta = p => p.fiestas === true || p.cat === 'Fiestas';
+  const hayFiestas = products.some(esFiesta);
+  const fiestaGroup = p => {
+    const t = String(p.name || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    if (/pan dulce|budin|panettone|stollen/.test(t)) return 'Pan dulce y budines';
+    if (/turron|garrapi|confit|mantecol|nougat|bombon|almendra|nuez|frutos secos|pasas/.test(t)) return 'Turrones y golosinas';
+    if (/estuche|canasta|caja regalo|regalo/.test(t)) return 'Estuches y regalos';
+    if (/sidra|ananá fizz|anana fizz|frizz/.test(t)) return 'Sidras';
+    return '';
+  };
+  if (typeof belongsToView === 'function') {
+    const originalBelongs = belongsToView;
+    belongsToView = function (p) {
+      if (activeView === 'Fiestas') return esFiesta(p);
+      if (p.cat === 'Fiestas' && activeView !== 'Todos' && activeView !== 'Ofertas') return false;
+      return originalBelongs(p);
+    };
+  }
+  {
+    const originalSub = subcategoryGroup;
+    subcategoryGroup = function (p) {
+      if (activeView !== 'Fiestas') return originalSub(p);
+      const g = fiestaGroup(p);
+      if (g) return g;
+      if (p.cat === 'Bebidas' && typeof beverageGroup === 'function') return beverageGroup(p);
+      if (p.cat === 'Alimentos' && typeof foodGroup === 'function') return foodGroup(p);
+      if (p.cat === 'Combos') return 'Combos de fiestas';
+      return 'Especiales de fiestas';
+    };
+  }
+  const tabs = document.querySelector('.catalogTabs');
+  if (hayFiestas && tabs && !tabs.querySelector('[data-view="Fiestas"]')) {
+    const b = document.createElement('button'); b.type = 'button'; b.dataset.view = 'Fiestas'; b.textContent = '🎄 Fiestas';
+    tabs.prepend(b);
+  }
+  const fiestaOpt = document.querySelector('[data-choose="Fiestas"]');
+  if (fiestaOpt) fiestaOpt.hidden = !hayFiestas;
+
   const unfiltered = () => !query && activeSubcategory === 'all' && activeDetail === 'all' && activeBrand === 'all' && !buyerMode && !businessSelection;
   const ROW_MAX = 12;
   // "Más vendidos": los marcados con SI en la columna mas_vendido de la planilla.
@@ -103,6 +142,11 @@
       const list = filteredProducts();
       const groups = new Map();
       for (const p of list) { const g = subcategoryGroup(p) || 'Otros'; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(p); }
+      if (activeView === 'Fiestas') {
+        const prio = ['Pan dulce y budines', 'Turrones y golosinas', 'Estuches y regalos', 'Sidras', 'Espumantes', 'Combos de fiestas'];
+        const sorted = [...groups].sort((x, y) => { const a = prio.indexOf(x[0]), b = prio.indexOf(y[0]); return (a < 0 ? 99 : a) - (b < 0 ? 99 : b); });
+        groups.clear(); sorted.forEach(([k, v]) => groups.set(k, v));
+      }
       if (groups.size > 1) {
         grid.classList.add('rows');
         const top = topSellers(list).filter(p => p.cat !== 'Combos');

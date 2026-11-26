@@ -57,6 +57,7 @@
       else if (col('precio_caja') >= 0) { delete p.boxPrice; delete p.boxUnitPrice; }
       if (col('oferta') >= 0) p.featuredOffer = yes(get('oferta'));
       if (col('mas_vendido') >= 0) p.bestSeller = yes(get('mas_vendido'));
+      if (col('fiestas') >= 0) p.fiestas = yes(get('fiestas'));
       if (no(get('activo'))) hidden.add(p);
     }
     window.PRODUCTS = products.filter(p => !hidden.has(p) && (p.price || p.boxPrice));
@@ -88,7 +89,7 @@
     window.__sheetCombos = true;
   };
 
-  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=5'; document.body.appendChild(t); }; document.body.appendChild(s); };
+  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=6'; document.body.appendChild(t); }; document.body.appendChild(s); };
   let done = false;
   const go = () => { if (!done) { done = true; start(); } };
   setTimeout(go, 6000); // si la planilla tarda, muestra los precios guardados
