@@ -43,13 +43,13 @@
       if (!id && !name) continue;
       let p = byId.get(id);
       if (!p) { // producto nuevo cargado en la planilla
-        p = { id: id || 'n' + products.length, slug: (name || id).toLowerCase().replace(/[^a-z0-9]+/g, '-'), name, price: null, regularPrice: null, cat: get('categoria') || 'Alimentos', categories: [], brand: get('marca'), sku: '', img: get('imagen'), featuredOffer: false };
+        p = { id: id || 'n' + products.length, slug: (name || id).toLowerCase().replace(/[^a-z0-9]+/g, '-'), name, price: null, regularPrice: null, cat: get('categoria') || 'Alimentos', categories: [], brand: get('marca'), sku: '', img: imgUrl(get('imagen')), featuredOffer: false };
         products.push(p); byId.set(String(p.id), p);
       }
       if (name) p.name = name;
       if (get('categoria')) p.cat = get('categoria');
       if (get('marca')) p.brand = get('marca');
-      if (get('imagen')) p.img = get('imagen');
+      if (get('imagen')) p.img = imgUrl(get('imagen'));
       const unit = num(get('precio_unidad')), box = num(get('precio_caja')), qty = num(get('unidades_caja'));
       if (unit) p.price = unit;
       if (qty) p.boxQuantity = qty;
