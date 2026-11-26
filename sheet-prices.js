@@ -4,7 +4,7 @@
   const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vToC-r3Lqc13RFxeMYNEcmiExgNXzlzSp0PfbhgnjFuKScG7sxdV-r0fEjRV4l04Yhpy_uzD4bjV3K8/pub?output=csv';
   const APP = 'app-20261113d.js?v=8';
   // Pestaña "Combos" de la misma planilla (si no existe o falla, quedan los combos de siempre).
-  const COMBOS_GID = '';
+  const COMBOS_GID = '588497962';
   const COMBOS_CSV = COMBOS_GID ? SHEET_CSV.replace('pub?output=csv', 'pub?gid=' + COMBOS_GID + '&single=true&output=csv') : '';
 
   const parseCSV = text => {
