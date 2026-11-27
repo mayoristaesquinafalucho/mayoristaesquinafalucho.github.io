@@ -240,4 +240,5 @@
   const sInput = document.getElementById('search'); if (sInput) sInput.placeholder = 'Buscar: fernet, aceite, yerba…';
 
   renderCatalog();
+  document.documentElement.classList.remove('cargando');
 })();
