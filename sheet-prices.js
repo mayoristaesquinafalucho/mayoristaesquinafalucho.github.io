@@ -90,7 +90,7 @@
     window.__sheetCombos = true;
   };
 
-  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=9'; document.body.appendChild(t); }; document.body.appendChild(s); };
+  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=10'; document.body.appendChild(t); }; document.body.appendChild(s); };
   let done = false;
   const go = () => { if (!done) { done = true; start(); } };
   setTimeout(go, 6000); // si la planilla tarda, muestra los precios guardados

@@ -44,6 +44,17 @@
       <div class="miniFoot">${ls.map(l => lineHtml(p, l, ls.length > 1)).join('')}</div>
     </article>`;
   };
+  const igCode = u => { const m = String(u || '').match(/instagram\.com\/(?:[\w.]+\/)?(?:p|reels?|tv)\/([A-Za-z0-9_-]+)/); return m ? m[1] : ''; };
+  const abrirVideo = code => {
+    const v = document.createElement('div'); v.className = 'igModal';
+    v.innerHTML = `<div class="igBox"><button class="igClose" type="button" aria-label="Cerrar">×</button><iframe src="https://www.instagram.com/p/${code}/embed/" allowfullscreen allow="autoplay; encrypted-media" title="Video de Instagram"></iframe><a href="https://www.instagram.com/p/${code}/" target="_blank" rel="noopener">Abrir en Instagram</a></div>`;
+    const cerrar = () => { v.remove(); document.removeEventListener('keydown', esc_); };
+    const esc_ = e => { if (e.key === 'Escape') cerrar(); };
+    v.addEventListener('click', e => { if (e.target === v || e.target.closest('.igClose')) cerrar(); });
+    document.addEventListener('keydown', esc_);
+    document.body.appendChild(v);
+  };
+  document.addEventListener('click', e => { const b = e.target.closest('[data-ig]'); if (b) { e.preventDefault(); abrirVideo(b.dataset.ig); } });
   const comboCard = p => {
     const items = p.comboItems || [];
     const k = `${p.id}:unit`;
@@ -51,7 +62,7 @@
       <button class="miniImg" type="button" data-product-detail="${esc(p.id)}" aria-label="Ver ${esc(p.name)}"><img loading="lazy" src="${esc(p.img)}" alt=""><em>Combo</em></button>
       <button class="miniName" type="button" data-product-detail="${esc(p.id)}">${esc(p.name)}</button>
       ${items.length ? `<details class="miniItems"><summary>Qué trae (${items.length})</summary><ul>${items.map(t => `<li>${esc(t)}</li>`).join('')}</ul></details>` : ''}
-      ${p.instagram ? `<a class="miniIg" href="${esc(p.instagram)}" target="_blank" rel="noopener">Ver en Instagram</a>` : ''}
+      ${igCode(p.instagram) ? `<button class="miniVideo" type="button" data-ig="${esc(igCode(p.instagram))}">▶ Ver video</button>` : (p.instagram ? `<a class="miniIg" href="${esc(p.instagram)}" target="_blank" rel="noopener">Ver en Instagram</a>` : '')}
       <div class="miniFoot"><div class="miniLine" data-line="${k}"><div class="miniPrice"><strong>${fmt(p.price)}</strong></div><span class="miniCtl">${qtyHtml(k, p.name)}</span></div></div>
     </article>`;
   };
@@ -233,6 +244,12 @@
   .miniItems summary{cursor:pointer;color:var(--blue);font-weight:600}
   .miniItems ul{margin:6px 0 0;padding-left:16px}
   .miniIg{display:inline-block;margin:0 10px 6px;font-size:12px;font-weight:600;color:var(--blue)}
+  .miniVideo{display:block;margin:0 10px 8px;padding:7px 12px;border:0;border-radius:999px;background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);color:#fff;font:700 12.5px 'DM Sans',sans-serif;cursor:pointer}
+  .igModal{position:fixed;inset:0;z-index:9999;background:rgba(6,29,73,.78);display:flex;align-items:center;justify-content:center;padding:16px}
+  .igBox{position:relative;width:min(420px,94vw);height:min(760px,88vh);background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .igBox iframe{flex:1;width:100%;border:0}
+  .igBox a{display:block;text-align:center;padding:10px;font:600 13px 'DM Sans',sans-serif;color:var(--blue)}
+  .igClose{position:absolute;top:8px;right:8px;z-index:2;width:36px;height:36px;border:0;border-radius:50%;background:#061d49;color:#fff;font-size:22px;cursor:pointer}
   #catalogo .catalogGrid:not(.rows) .comboMini{grid-column:span 1}
   @media(min-width:900px){.miniRail{grid-auto-columns:190px}}`;
   document.head.appendChild(css);
