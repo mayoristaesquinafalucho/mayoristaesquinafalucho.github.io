@@ -1,11 +1,11 @@
 // Lee los precios de la planilla de Google y después arranca el catálogo.
 // Para cambiar un precio: editá la planilla. No hace falta tocar este archivo.
 (() => {
-  const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vToC-r3Lqc13RFxeMYNEcmiExgNXzlzSp0PfbhgnjFuKScG7sxdV-r0fEjRV4l04Yhpy_uzD4bjV3K8/pub?output=csv';
+  const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vToC-r3Lqc13RFxeMYNEcmiExgNXzlzSp0PfbhgnjFuKScG7sxdV-r0fEjRV4l04Yhpy_uzD4bjV3K8/pub?gid=120510501&single=true&output=csv';
   const APP = 'app-20261113d.js?v=8';
   // Pestaña "Combos" de la misma planilla (si no existe o falla, quedan los combos de siempre).
   const COMBOS_GID = '588497962';
-  const COMBOS_CSV = COMBOS_GID ? SHEET_CSV.replace('pub?output=csv', 'pub?gid=' + COMBOS_GID + '&single=true&output=csv') : '';
+  const COMBOS_CSV = COMBOS_GID ? SHEET_CSV.replace('gid=120510501', 'gid=' + COMBOS_GID) : '';
 
   const parseCSV = text => {
     const rows = []; let row = [], cell = '', q = false;
