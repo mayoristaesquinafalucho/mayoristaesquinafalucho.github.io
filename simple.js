@@ -59,10 +59,10 @@
     const items = p.comboItems || [];
     const k = `${p.id}:unit`;
     return `<article class="card mini comboMini" data-mini="${esc(p.id)}">
-      <button class="miniImg" type="button" data-product-detail="${esc(p.id)}" aria-label="Ver ${esc(p.name)}"><img loading="lazy" src="${esc(p.img)}" alt=""><em>Combo</em></button>
+      ${igCode(p.instagram) ? `<div class="miniReel"><iframe src="https://www.instagram.com/p/${esc(igCode(p.instagram))}/embed/" scrolling="no" loading="lazy" allow="autoplay; encrypted-media; fullscreen" title="Video de ${esc(p.name)}"></iframe></div>` : `<button class="miniImg" type="button" data-product-detail="${esc(p.id)}" aria-label="Ver ${esc(p.name)}"><img loading="lazy" src="${esc(p.img)}" alt=""><em>Combo</em></button>`}
       <button class="miniName" type="button" data-product-detail="${esc(p.id)}">${esc(p.name)}</button>
       ${items.length ? `<details class="miniItems"><summary>Qué trae (${items.length})</summary><ul>${items.map(t => `<li>${esc(t)}</li>`).join('')}</ul></details>` : ''}
-      ${igCode(p.instagram) ? `<button class="miniVideo" type="button" data-ig="${esc(igCode(p.instagram))}">▶ Ver video</button>` : (p.instagram ? `<a class="miniIg" href="${esc(p.instagram)}" target="_blank" rel="noopener">Ver en Instagram</a>` : '')}
+      ${p.instagram && !igCode(p.instagram) ? `<a class="miniIg" href="${esc(p.instagram)}" target="_blank" rel="noopener">Ver en Instagram</a>` : ''}
       <div class="miniFoot"><div class="miniLine" data-line="${k}"><div class="miniPrice"><strong>${fmt(p.price)}</strong></div><span class="miniCtl">${qtyHtml(k, p.name)}</span></div></div>
     </article>`;
   };
@@ -245,6 +245,8 @@
   .miniItems ul{margin:6px 0 0;padding-left:16px}
   .miniIg{display:inline-block;margin:0 10px 6px;font-size:12px;font-weight:600;color:var(--blue)}
   .miniVideo{display:block;margin:0 10px 8px;padding:7px 12px;border:0;border-radius:999px;background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);color:#fff;font:700 12.5px 'DM Sans',sans-serif;cursor:pointer}
+  .miniReel{display:block;position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;container-type:inline-size;background:#000;border-radius:14px 14px 0 0}
+  .miniReel iframe{position:absolute;border:0;width:143cqw;height:calc(56px + 180cqw + 160px);left:-21.5cqw;top:calc(-56px - 26.5cqw)}
   .igModal{position:fixed;inset:0;z-index:9999;background:rgba(6,29,73,.78);display:flex;align-items:center;justify-content:center;padding:16px}
   .igBox{position:relative;width:min(420px,94vw);height:min(760px,88vh);background:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
   .igBox iframe{flex:1;width:100%;border:0}

@@ -76,12 +76,12 @@
     if (!rows || rows.length < 2) return;
     const head = rows[0].map(h => h.trim().toLowerCase());
     const at = re => head.findIndex(h => re.test(h));
-    const ci = { activo: at(/^activo/), nombre: at(/^nombre/), precio: at(/^precio/), incluye: at(/^incluye/), foto: at(/^foto/), ig: at(/^instagram/) };
+    const ci = { activo: at(/^activo/), nombre: at(/^nombre/), precio: at(/^precio/), incluye: at(/^incluye/), foto: at(/^foto/), ig: at(/^instagram/), mano: at(/^a mano/), calc: at(/^calculado/) };
     if (ci.nombre < 0 || ci.precio < 0) return;
     const combos = [];
     rows.slice(1).forEach((r, i) => {
       const g = k => (ci[k] >= 0 ? (r[ci[k]] || '').trim() : '');
-      const name = g('nombre'), price = num(g('precio'));
+      const name = g('nombre'), price = num(g('precio')) || num(g('mano')) || num(g('calc'));
       if (!name || !price || no(g('activo'))) return;
       combos.push({ id: 'cmb-' + slug(name), slug: 'combo-' + slug(name), name, price, regularPrice: null, cat: 'Combos', categories: ['Combos'], brand: 'Falucho', sku: 'COMBO', description: '', img: imgUrl(g('foto')) || 'assets/banner-combos.png', packLabel: 'COMBO', comboItems: g('incluye').split(/\s*[;\n]\s*/).filter(Boolean), instagram: g('ig'), fromSheet: true, order: i });
     });
@@ -90,7 +90,7 @@
     window.__sheetCombos = true;
   };
 
-  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=10'; document.body.appendChild(t); }; document.body.appendChild(s); };
+  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=11'; document.body.appendChild(t); }; document.body.appendChild(s); };
   let done = false;
   const go = () => { if (!done) { done = true; start(); } };
   setTimeout(go, 6000); // si la planilla tarda, muestra los precios guardados
