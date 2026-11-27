@@ -41,6 +41,7 @@
     return `<article class="card mini" data-mini="${esc(p.id)}">
       <button class="miniImg" type="button" data-product-detail="${esc(p.id)}" aria-label="Ver ${esc(p.name)}"><img loading="lazy" src="${esc(p.img)}" alt="">${p.featuredOffer ? '<em>Oferta</em>' : ''}</button>
       <button class="miniName" type="button" data-product-detail="${esc(p.id)}">${esc(p.name)}</button>
+      ${(p.incluye || []).length ? `<details class="miniItems"><summary>Qué trae (${p.incluye.length})</summary><ul>${p.incluye.map(t => `<li>${esc(t)}</li>`).join('')}</ul></details>` : ''}
       <div class="miniFoot">${ls.map(l => lineHtml(p, l, ls.length > 1)).join('')}</div>
     </article>`;
   };

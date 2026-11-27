@@ -59,6 +59,7 @@
       if (col('mas_vendido') >= 0) p.bestSeller = yes(get('mas_vendido'));
       if (col('fiestas') >= 0) p.fiestas = yes(get('fiestas'));
       if (col('seccion') >= 0) p.seccion = get('seccion');
+      if (col('incluye') >= 0) { const inc = get('incluye'); p.incluye = inc ? inc.split(/\s*[;\n]\s*/).filter(Boolean) : []; }
       if (no(get('activo'))) hidden.add(p);
     }
     window.PRODUCTS = products.filter(p => !hidden.has(p) && (p.price || p.boxPrice));
@@ -90,7 +91,7 @@
     window.__sheetCombos = true;
   };
 
-  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=11'; document.body.appendChild(t); }; document.body.appendChild(s); };
+  const start = () => { const s = document.createElement('script'); s.src = APP; s.onload = () => { const t = document.createElement('script'); t.src = 'simple.js?v=12'; document.body.appendChild(t); }; document.body.appendChild(s); };
   let done = false;
   const go = () => { if (!done) { done = true; start(); } };
   setTimeout(go, 6000); // si la planilla tarda, muestra los precios guardados
