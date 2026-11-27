@@ -193,4 +193,5 @@
     if (direct) whenReady(() => openView(direct.view));
     else if (param === 'todo') whenReady(() => openView('Todos'));
   }
+  document.documentElement.classList.remove('arranque');
 })();
