@@ -83,13 +83,15 @@
   }
 
   // ---- Fiestas: productos tildados en la columna "fiestas" o con categoría Fiestas ----
+  const FIESTA_SECS = ['Pan dulce y budines', 'Cajas navideñas', 'Estuches', 'Turrones y golosinas'];
   const esFiesta = p => p.fiestas === true || p.cat === 'Fiestas';
   const hayFiestas = products.some(esFiesta);
   const fiestaGroup = p => {
     const t = String(p.name || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     if (/pan dulce|budin|panettone|stollen/.test(t)) return 'Pan dulce y budines';
+    if (/caja navide|cajas navide|canasta|caja de fiestas|caja fiestas/.test(t)) return 'Cajas navideñas';
+    if (/estuche|caja regalo|regalo/.test(t)) return 'Estuches';
     if (/turron|garrapi|confit|mantecol|nougat|bombon|almendra|nuez|frutos secos|pasas/.test(t)) return 'Turrones y golosinas';
-    if (/estuche|canasta|caja regalo|regalo/.test(t)) return 'Estuches y regalos';
     if (/sidra|ananá fizz|anana fizz|frizz/.test(t)) return 'Sidras';
     return '';
   };
@@ -117,7 +119,7 @@
   {
     const autoSub = subcategoryGroup;
     subcategoryGroup = function (p) {
-      if (p.seccion && activeView !== 'Todos' && activeView !== 'Ofertas' && !(activeView === 'Fiestas' && p.cat !== 'Fiestas' && !p.fiestas)) return p.seccion;
+      if (p.seccion && activeView !== 'Todos' && activeView !== 'Ofertas' && (activeView !== 'Fiestas' || FIESTA_SECS.includes(p.seccion))) return p.seccion;
       return autoSub(p);
     };
   }
@@ -151,7 +153,7 @@
       const groups = new Map();
       for (const p of list) { const g = subcategoryGroup(p) || 'Otros'; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(p); }
       if (activeView === 'Fiestas') {
-        const prio = ['Pan dulce y budines', 'Turrones y golosinas', 'Estuches y regalos', 'Sidras', 'Espumantes', 'Combos de fiestas'];
+        const prio = FIESTA_SECS.concat(['Sidras', 'Espumantes', 'Combos de fiestas']);
         const sorted = [...groups].sort((x, y) => { const a = prio.indexOf(x[0]), b = prio.indexOf(y[0]); return (a < 0 ? 99 : a) - (b < 0 ? 99 : b); });
         groups.clear(); sorted.forEach(([k, v]) => groups.set(k, v));
       }
